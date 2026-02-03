@@ -1,0 +1,77 @@
+@charset "UTF-8";
+		* {box-sizing: border-box;}
+		body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif; }
+		.fl { float: left; }
+		.fr { float: right; }
+		#invite_code_header { 
+			width: 1440px; 
+			height: 119px; 
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			padding: 48px 0 40px;	
+		}
+		#invite_code_content > h1 {
+			font-size: 48px;
+			font-weight: 700;
+			text-align: center;
+			margin-top: -14px;
+    		margin-left: 5px;
+		}
+		#invite_code_content > div {
+			text-align: center;
+			width: 700px;
+			height: 113px;
+			margin: 0 auto;
+		}
+		#invite_code_content > div > p:first-child {
+			color: rgb(69, 66, 69);
+			font-size: 18px;
+			line-height: 27px;
+			letter-spacing: -1px;
+		}
+		#invite_code_content > div > p:last-child {
+		    color: rgb(69, 66, 69);
+		}
+		form { margin-left: 497px;}
+		.invite_code_input {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 448px;
+			height: 102px;
+		}
+		.invite_code_input > input[type='text']:HAS(input:focus) {
+			box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+		}
+		.invite_code_input > input[type='text'] {
+			width: 68.68px;
+	        height: 92px;
+	        font-size: 50px;
+	        line-height: 56px;
+			border: 1px solid rgba(29, 28, 29, 0.5);
+			text-align: center;
+			font-weight: 400;
+		}
+		.invite_code_input > input[type='text']:nth-child(1) {
+			border-top-left-radius: 6px;
+        	border-bottom-left-radius: 6px;
+		}
+		.invite_code_input > input[type='text']:nth-child(3) {
+			border-top-right-radius: 6px;
+        	border-bottom-right-radius: 6px;
+		}
+		.invite_code_input > div {
+			width: 12px;
+			height: 22px;
+			margin: 8px;
+			font-size: 15px;
+		}
+		.invite_code_input > input[type='text']:nth-child(5) {
+			border-top-left-radius: 6px;
+        	border-bottom-left-radius: 6px;
+		}
+		.invite_code_input > input[type='text']:nth-child(7) {
+			border-top-right-radius: 6px;
+        	border-bottom-right-radius: 6px;
+		}

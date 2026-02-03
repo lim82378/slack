@@ -1,0 +1,478 @@
+@charset "UTF-8";
+* { box-sizing: border-box; }
+ 	body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif; }
+ 	.fl { float: left; }
+ 	.fr { float: right; }
+	#header {
+		background-color: rgb(60, 10, 61);
+		width: 100%;
+		height: 40px;
+		display: flex;  /*검색창을 가운데로 오기위한 flex인데 flex 는 부모한테 줘야해서 여기다 줌*/
+		align-items: center;
+	}
+	#header > div {  /*검색창 div*/
+		width: 674px; 
+		height: 28px; 
+	 	border-radius: 4px;
+		background-color: rgb(115, 70, 119);
+		margin-left: 398px;
+		display: flex;
+		align-items: center; /*돋보기랑 정처산기 span 위치조정 부모에다가 flex*/
+		color: white;
+		cursor: pointer;
+	}
+	#header > div > svg { 
+		width: 15px; 
+		height: 15px; 
+		opacity: 0.6; 
+		margin-left: 9px; 
+		margin-right: 7px;
+	}
+	#header > div > span { font-size: 13px; font-weight: 400; }
+	#home2_sidebar {
+		background-color: rgb(60, 10, 61);
+		width: 70px;  /*사이즈 볼 때 컴퓨티드 보고 패딩, 마진 이런거 클릭해서 사이즈 찾기.*/
+		height: calc(100vh - 40px); /*상단 바의 height가 40px 이니깐 화면 비율 대비 calc 함수 써서 높이 구하기.*/
+		padding-top: 68px;
+	}
+	#home2_sidebar > div:first-child {  /*B2*/
+		position: absolute;
+		top: 47px;
+		width: 36px; 
+		height: 36px; 
+		margin-left: 16px; 
+		border-radius: 10px; 
+		background-color: rgb(133, 118, 135); 
+		color: rgb(39, 24, 44);
+		font-size: 20px;
+		font-weight: 600;
+		text-align: center;
+		line-height: 36px;   /*네모난 아이콘 안에서 위아래 높이를 flex를 쓰지 않고도 가능함.*/
+	}
+	#home2_sidebar > div:NOT(:first-child) { /*사이드바 첫번째 자식 : B2가 크기가 달라서 NOT을 줌*/
+		margin-left: 16px;
+		margin-bottom: 16px;  /* svg아이콘들끼리 간격조정을 위해 */
+		width: 36px;
+		height: 52px;
+		color: white;
+	}
+	#home2_sidebar > div:NOT(:first-child) > div:first-child { /*홈아이콘 div*/
+		width: 36px;
+		height: 36px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#home2_sidebar > div:NOT(:first-child):hover > div:first-child > svg { /* :hover 적용*/
+		width: 23px;
+		height: 23px;
+	}
+	#home2_sidebar > div.on:NOT(:first-child) > div:first-child { /* 아이콘 선택되어있을 때 회색 테두리 .on 으로옮겨다니면 됨*/
+		background-color: rgb(95, 53, 97);
+		border-radius: 8px;
+	}
+	#home2_sidebar > div:NOT(:first-child) > div:last-child {  /*아이콘 밑에 글자 홈*/
+		font-size: 11px;
+		line-height: 12px;
+		font-weight: 700;
+		text-align: center;
+		margin-top: 4px; /* 글자 div간의 간격 조정을 위해*/
+	}
+	#home2_sidebar > div:NOT(:first-child) > div:first-child > svg { /*홈아이콘_svg*/
+		width: 20px;
+		height: 20px;
+		transition: all 0.2s ease-in-out;  /*hover 걸려서 아이콘 커질 때 자연스럽게 해줌 */
+	}
+	#home2_sidebar > div { cursor: pointer; }
+	.all_search_main_content {
+		width: calc(100vw - 70px);
+		height: calc(100vh - 40px);
+	}
+	.all_search_main_content > div:first-child {
+		width: 1100px;
+		height: 26px;
+		margin-top: 14px;
+		margin-left: 107px;
+		margin-bottom: 25px;
+	}
+	.all_search_main_content > div:first-child > div {
+		text-align: left;
+	}
+	.all_search_main_content > div:first-child span { /*Search: "ㅇㅇ"*/
+		font-size: 18px;
+		font-weight: 400;
+	}
+	.all_search_main_content > div:nth-child(2) > span { /*필터*/
+		font-size: 13px;
+		font-weight: 700;
+		color: #1264A3;
+		margin-left: 20px;
+		cursor: pointer;
+	}
+	.all_search_main_content > div:nth-child(2) > span:hover {
+		text-decoration: underline;
+	}
+	.all_search_main_content > div:nth-child(2) { /*필터 컨테이너*/
+		margin-left: 107px;
+		margin-bottom: 15px;
+		position: relative;
+	}
+	.all_search_main_content > div:nth-child(2) > svg {
+		color: #1264A3;	
+		width: 18px;
+		height: 18px;
+		position: absolute;
+		top: 3px;
+		cursor: pointer;
+	}
+	.all_search_main_content > div:nth-child(3) {
+		color: #5e5d60;
+		font-size: 13px;
+		font-weight: 300;
+		margin-left: 107px;
+	}
+	.all_search_main_content_list {
+		width: 1152px;
+		height: 300px;
+		padding: 8px 4px;
+		margin-left: 102px;
+	}
+	.all_search_main_content_list > div {
+		width: 1150px;
+		height: 60px;
+		position: relative;
+		border: 1px solid rgb(233, 233, 233);
+		border-radius: 12px;
+		margin-bottom: 10px;
+	}
+	.all_search_main_content_list > div:hover {
+		background-color: rgb(247, 244, 249);
+	}
+	.all_search_main_content_list > div > div {
+		padding: 10px;
+	}
+	.all_search_main_content_list > div > div > div:first-child > img{ /*프로필 이미지*/
+		border-radius: 8px;
+	}
+	.all_search_main_content_list > div > div > div:nth-child(2) > div {
+		margin-left: 10px;
+		margin-top: -2px;
+	}
+	.all_search_main_content_list > div > div > div:nth-child(2) > div:first-child { /*승빈*/
+		color: #1d1c1d;
+		font-size: 15px;
+		font-weight: 600;
+	}
+	.all_search_main_content_list > div > div > div:nth-child(2) > span { /*#전체채팅방*/
+		position: absolute;
+		color: #5e5d60;
+		font-size: 13px;
+		top: 10px;
+		left: 100px;
+	}
+	.all_search_main_content_list > div > div > div:nth-child(3) { /*12월 7일*/
+		margin-right: 30px;
+		font-size: 13px;
+		font-weight: 300;
+		color: #5e5d60;
+	}
+	#home2_black_filter { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 10;}
+	#home2_popup_filter{
+		width: 520px;
+		height: 594px;
+		position: absolute; 
+		border-radius: 8px;
+		box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+		top: 50%; left: 50%; 
+		transform: translate(-50%, -50%);
+		/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+		background-color: white; 
+		z-index: 20;
+		
+	}
+	#home2_popup_filter > div:first-child > div { /*필터링 기준*/
+		width: 520px;
+		height: 70px;
+		color: rgb(29, 28, 29);
+		font-size: 22px;
+		font-weight: 700;
+	    margin-left: 27px;
+   		margin-top: 20px;
+   		position: relative;
+	}
+	#home2_popup_filter > div:first-child > button  { 
+		width: 32px; 
+		height: 32px;
+		cursor:pointer;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		position: absolute;
+		top: 29px;
+    	right: 32px;
+   	    padding: 6px 4px;
+	}
+	#home2_popup_filter > div:first-child > button:hover { 
+		background-color: rgb(238, 238, 238);
+		border-radius: 6px;
+	}
+	#home2_popup_filter > div:first-child > button > svg {
+		width: 18px;
+		height: 18px;
+	}
+	#home2_popup_filter > div:nth-child(2) {
+		width: 520px;
+		height: 500px;
+		margin-top: 24px;
+	}
+	.home2_popup_filter_list {
+		position: relative;
+	}
+	.home2_popup_filter_list > span { /*보낸사람*/
+		font-size: 15px;
+		font-weight: 600;
+		position: absolute;
+		top: -30px;
+    	left: 30px;
+	}.home2_popup_filter_list > div {
+		width: 464px;
+		height: 36px;
+		border: 1px solid rgb(182, 182, 183);
+		border-radius: 8px;
+		background-color: rgb(255, 255, 255);
+		margin: 0 auto 45px;
+		padding-left: 12px;
+		padding-top: 3px;
+	}
+	.home2_popup_filter_list div:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	.home2_popup_filter_list > div > input[type='text'] {
+		border: none;
+		outline: none;
+		background-color: transparent;
+		width: 400px;
+		font-size: 15px;
+		line-height: 28px;
+		font-weight: 400;
+		color: rgb(29, 28, 29);
+		cursor: pointer;
+	}
+	.home2_popup_filter_list > div > input[type='text']::placeholder {
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+	}
+	.home2_popup_filter_list_choice {
+		width: 488px;
+		border-radius: 6px;
+		border: 1px solid #5e5d6021;
+		padding: 12px 0;
+		background-color: rgb(248, 248, 248);
+		position: absolute;
+	    top: 141px;
+    	left: 15px;
+    	z-index: 50;
+	}
+	.choice_to {
+	    top: 224px;
+	}
+	.choice_who {
+		top: 304px;
+	}
+	.home2_popup_filter_list_choice > div {
+		padding: 0 24px;
+		width: 486px;
+		height: 32px;
+		font-size: 15px;
+		background-color: rgb(248, 248, 248);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+	}
+	.home2_popup_filter_list_choice > div:hover {
+		background-color: rgb(46, 99, 158);
+		color: rgb(255, 255, 255);
+	}
+	.home2_popup_filter_list_choice > div img { /*작은 프로필 아이콘*/
+		border-radius: 6px;
+		margin-top: 5px;
+	}
+	.home2_popup_filter_list_choice > div strong { /*민재*/
+		margin-left: 9px;
+	}
+	.home2_popup_filter_list_choice > div span {
+		position: absolute;
+	}
+	.home2_popup_filter_list_choice > div svg {
+		width: 20px;
+		height: 20px;
+		margin-left: 9px;
+	}
+	.home2_popup_filter_list_choice > div > div:last-child > div:nth-child(3) { /*김민재*/
+		margin-left: 5px;
+		font-weight: 400;
+		color: rgb(29, 28, 29);
+	}
+	.home2_popup_filter_list_date {
+		position: relative;
+	}
+	.home2_popup_filter_list_date > div {
+		width: 464px;
+		height: 36px;
+		border: 1px solid rgb(182, 182, 183);
+		border-radius: 8px;
+		background-color: rgb(255, 255, 255);
+		margin: 0 auto 45px;
+		padding-left: 12px;
+		padding-top: 3px;
+		position: relative;
+		cursor: pointer;	
+	}
+	.home2_popup_filter_list_date > div:hover {
+		background-color: rgb(248, 248, 248);
+	}
+	.home2_popup_filter_list_date > span {
+		font-size: 15px;
+		font-weight: 600;
+		position: absolute;
+		top: -30px;
+    	left: 30px;
+	}
+	.home2_popup_filter_list_date > div > span {
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+	}
+	.home2_popup_filter_list_date > div > svg {
+		width: 18px;
+		height: 18px;
+		position: absolute;
+		top: 8px;
+		right: 9px;
+	}
+	.home2_popup_filter_list_date_choice {
+		width: 280px;
+		border-radius: 6px;
+		border: 1px solid #5e5d6021;
+		padding: 12px 0;
+		z-index: 50;
+		position: absolute;
+		left: 27px;
+    	bottom: -7px;
+		font-size: 15px;
+		font-weight: 500;
+		background-color: rgb(255, 255, 255);
+	}
+	.home2_popup_filter_list_date_choice > div {
+		width: 278px;
+		height: 32px;
+		padding: 4px 24px;
+		position: relative;
+	}
+	.home2_popup_filter_list_date_choice > div:nth-child(2) span { /*모든 기간, Today, Yesterday*/
+		/* margin-left: 5px; */
+		position: absolute;
+		top: 3px;
+		font-weight: 400;
+	}
+	.home2_popup_filter_list_date_choice > div:hover {
+		background-color: rgb(46, 99, 158);
+		color: rgb(255, 255, 255);
+	}
+	.home2_popup_filter_list_date_choice > div.on { /*현재 체크된 기간*/
+		color: rgb(46, 99, 158);
+		font-weight: 600;
+	}
+	.home2_popup_filter_list_date_choice > div.on svg {
+		display: block;
+	}
+	.home2_popup_filter_list_date_choice > div.on:hover {
+		color: rgb(255, 255, 255)!important;
+	}
+	.home2_popup_filter_list_date_choice svg {
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		left: 4px;
+		top: 6px;
+	}
+	.home2_popup_filter_list_search {
+		width: 520px;
+		height: 84px;
+		padding: 24px 28px;
+		border-top: 1px solid rgb(226, 226, 226);
+		margin-top: 78px;
+	}
+	.home2_popup_filter_list_search > div {
+		width: 80px;
+		height: 36px;
+		background-color: rgb(52, 120, 92);
+		border-radius: 8px;
+		border:none;
+		padding: 0 12px;
+		color: rgb(255, 255, 255);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 17px;
+		cursor: pointer;
+	}
+	.home2_popup_filter_list_search > div:hover {
+		background-color: rgb(46, 108, 83);
+	}
+	.home2_popup_filter_list_name {
+		z-index: 50;
+		top: 15px;
+		width: 91px;
+		height: 28px;
+		position: absolute;
+		top: 119px;
+		left: 40px;
+	}
+	.home2_popup_filter_list_name > div {
+		width: 91px;
+		background-color: rgb(235, 247, 251);
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.home2_popup_filter_list_name > div > div {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+	.home2_popup_filter_list_name > div > div > div:first-child {
+		display: flex;
+		align-items: center;
+	}
+	.home2_popup_filter_list_name > div > div  img {
+		border-radius: 8px;
+		margin-left: 1px;
+	}
+	.home2_popup_filter_list_name > div > div > div:last-child {
+		width: 20px;
+		height: 20px;
+		margin-left: 5px;
+		padding-left: 1px;
+	}
+	.home2_popup_filter_list_name > div > div > div:last-child:hover {
+		background-color: rgb(224, 236, 241);
+	}
+	.home2_popup_filter_list_name > div svg {
+		width: 18px; 
+		height: 18px;
+		margin-right: 3px;
+	}
+	.home2_popup_filter_list_name span { /*민재*/
+		font-weight: 500;
+		font-size: 15px;
+		display: flex;
+		align-items: center;
+	}
+	 
+	
+	 
+	 .home2_popup_choice_container:HAS(span.on) { color: rgb(46, 99, 158); }
+	 #home2_clear_filter { width: 100vw; height: 100vh; background-color: transparent; position: absolute; z-index: 20; }

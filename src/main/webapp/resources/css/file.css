@@ -1,0 +1,774 @@
+@charset "UTF-8";
+	* { box-sizing: border-box; }
+ 	body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif;}
+ 	.fl { float: left; }
+ 	.fr { float: right; }
+ 	#file_header {
+		background-color: rgb(60, 10, 61);
+		width: 100%;
+		height: 40px;
+		display: flex;  /*검색창을 가운데로 오기위한 flex인데 flex 는 부모한테 줘야해서 여기다 줌*/
+		align-items: center;
+	}
+	#file_header > div {  /*검색창 div*/
+		width: 674px; 
+		height: 28px; 
+	 	border-radius: 4px;
+		background-color: rgb(115, 70, 119);
+		margin-left: 398px;
+		display: flex;
+		align-items: center; /*돋보기랑 정처산기 span 위치조정 부모에다가 flex*/
+		color: white;
+		cursor: pointer;
+		
+	}
+	#file_header > div > svg { 
+		width: 15px; 
+		height: 15px; 
+		opacity: 0.6; 
+		margin-left: 9px; 
+		margin-right: 7px;
+	}
+	#file_header > div > span { font-size: 13px; font-weight: 400; }
+	#file_sidebar{
+		background-color: rgb(60, 10, 61);
+		width: 80px;  /*사이즈 볼 때 컴퓨티드 보고 패딩, 마진 이런거 클릭해서 사이즈 찾기.*/
+		height: calc(100vh - 40px); /*상단 바의 height가 40px 이니깐 화면 비율 대비 calc 함수 써서 높이 구하기.*/
+		padding-top: 68px;
+	}
+	#file_sidebar > div:first-child {  /*B2*/
+		position: absolute;
+		top: 47px;
+		width: 36px; 
+		height: 36px; 
+		margin-left: 16px; 
+		border-radius: 10px; 
+		background-color: rgb(133, 118, 135); 
+		color: rgb(39, 24, 44);
+		font-size: 20px;
+		font-weight: 600;
+		text-align: center;
+		line-height: 36px;   /*네모난 아이콘 안에서 위아래 높이를 flex를 쓰지 않고도 가능함.*/
+	}
+	#file_sidebar > div { cursor: pointer; }
+	#file_sidebar > div:NOT(:first-child) { /*사이드바 첫번째 자식 : B2가 크기가 달라서 NOT을 줌*/
+		margin-left: 16px;
+		margin-bottom: 16px;  /* svg아이콘들끼리 간격조정을 위해 */
+		width: 36px;
+		height: 52px;
+		color: white;
+	}
+	#file_sidebar > div:NOT(:first-child):hover > div:first-child > svg { /* :hover 적용*/
+		width: 23px;
+		height: 23px;
+	}
+	#file_sidebar > div:NOT(:first-child) > div:first-child { /*홈아이콘 div*/
+		width: 36px;
+		height: 36px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#file_sidebar > div.on:NOT(:first-child) > div:first-child { /* 아이콘 선택되어있을 때 회색 테두리 .on 으로옮겨다니면 됨*/
+		background-color: rgb(95, 53, 97);
+		border-radius: 8px;
+	}
+	#file_sidebar > div:NOT(:first-child) > div:last-child {  /*아이콘 밑에 글자 홈*/
+		font-size: 11px;
+		line-height: 12px;
+		font-weight: 700;
+		text-align: center;
+		margin-top: 4px; /* 글자 div간의 간격 조정을 위해*/
+	}	
+	#file_sidebar > div:NOT(:first-child) > div:first-child > svg { /*홈아이콘_svg*/
+		width: 20px;
+		height: 20px;
+		transition: all 0.2s ease-in-out;  /*hover 걸려서 아이콘 커질 때 자연스럽게 해줌 */
+	}
+	#file_side_menu {	
+		width: 328px;  /*이 값은 고정하기로*/
+		height: calc(100vh - 40px); 
+		background-color: rgb(85, 38, 87);
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		margin-left: -10px;
+	}
+	#file_side_menu > div {
+		margin-top: 13px;
+		margin-left: 22px;
+	}
+	#file_side_menu > div > span {
+		font-size: 18px;
+		color: rgb(255, 255, 255);
+	}
+	#file_main_content {  /*중앙에 위치한 흰색 div*/
+		width: calc(100vw - 70px - 328px); 
+		height: calc(100vh - 40px); 
+		background-color: rgb(248, 248, 248);
+		overflow-y: auto;
+		overflow-x: auto;		
+	}
+	#file_main_content > div:first-child {
+		width: 1038px;
+		height: 50px;
+	}
+	#file_main_content > div:first-child > div { /*모든파일*/
+		width: 960px;
+		height: 24px;
+		font-size: 18px;
+		font-weight: 700;
+		margin-left: 41px;
+		margin-top: 12px;
+	}
+	.file_main_input {
+		width: 1038px;
+		height: 36px;
+		margin-top: -13px;
+		margin-left: 35px;
+	}
+	.file_main_input > div {
+		width: 966px;
+		height: 38px;
+		border: 1px solid #5e5d6021;
+		border-radius: 8px;
+		position: relative;
+		background-color: white	;
+		padding-top: 5px;
+		padding-left: 45px;
+	}
+	.file_main_input > div > svg {
+		width: 20px;
+		height:20px;
+		color: rgb(97, 96, 97);
+		position: absolute;
+		left: 10px;
+		top: 8px;
+	}
+	.file_main_input > div:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	.file_main_input > div > input[type='text'] {
+		width: 919px;
+		height: 22px;
+		font-size: 15px;
+		font-weight: 400;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		cursor: pointer;
+	}
+	.file_main_input > div > input[type='text']::placeholdeer {
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	.file_main_orderby {
+		width: 968px;
+		height: 41px;
+		margin: 23px auto 0;
+	}
+	.file_main_orderby > div {
+		display: flex;
+	}
+	.file_main_orderby > div > div:first-child { /*5개의 유형 컨테이너*/
+		width: 124px;
+		height: 28px;
+		background-color: rgb(18, 100, 163);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 6px;
+		cursor: pointer;
+		margin-top: 2px;
+		margin-left: 6px;
+	}
+	.file_main_orderby > div > div:first-child > svg {
+		color: white;
+		width: 18px;
+		height: 18px;
+	}
+	.file_main_orderby > div > div:first-child > span {
+		color: white;
+		font-size: 13px;
+	}
+	.file_five_style  {
+		width: 265px;
+		height: 146px;
+		border: 1px solid rgb(233, 233, 233);
+		border-radius: 10px;
+		background-color: white;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		position: absolute;
+		top: 175px;
+    	right: 10px;
+	}
+	.file_five_style > div {
+		width: 265px;
+		height: 32px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		padding: 0 24px;
+		position: relative;
+		cursor: pointer;
+	}
+	.file_five_style  > div:hover {
+		background-color: rgb(46, 99, 158);
+		color: rgb(255, 255, 255); /*이거 질문 */
+	}
+	.file_five_style  > div  img {
+		width: 14px;
+		height: 14px;
+		margin: 1px 12px 0 0;
+	}
+	.file_five_style  > div  svg { 
+		width: 20px;
+		height: 20px;
+		color: #1264A3;
+		margin-right: 8px;
+	}
+	.file_five_style  > div:hover  svg > path { 
+		color: rgb(255, 255, 255);
+	}
+	.file_five_style  > div  span { /*스프레드시트*/
+		color: #1264A3;
+		font-size: 15px;
+		font-weight: 700;
+		position: absolute;
+		left: 83px;
+		top: 3px;
+	}
+	.file_five_style  > div:hover  span { /*스프레드시트*/
+		color: rgb(255, 255, 255);
+	}
+	.file_main_orderby > div > div:nth-child(3) { /*최근에 확인함 컨테이너*/
+		width: 124px;
+		height: 28px;
+		border-radius: 6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 6px;
+		border: 1px solid rgb(233, 233, 233);
+		background-color: white;
+		cursor: pointer;
+		margin-top: 2px;
+		margin-left: 10px;
+	}
+	.file_main_orderby > div > div:nth-child(3):hover {
+		background-color: rgb(248, 248, 248);
+	}
+	.file_main_orderby > div > div:nth-child(3) > span {
+		font-size: 13px;
+		font-weight: 700;
+	}
+	.file_main_orderby > div > div:nth-child(3) > svg {
+		width: 18px;
+		height: 18px;
+	}
+	.file_main_orderby > div > div:last-child { /*필터 컨테이너*/
+		width: 40px;
+		height: 28px;
+		border-radius: 6px;
+		border: 1px solid rgb(233, 233, 233);
+		padding-left: -2px;
+		padding-top: 3px;
+		padding-bottom: 4px;
+		background-color: white;
+		cursor: pointer;
+		margin-top: 2px;
+		margin-left: 1px;
+	}
+	.file_main_orderby > div > div:last-child:hover {
+		background-color: rgb(248, 248, 248);
+	}
+	.file_main_orderby > div > div:last-child > svg {
+		width: 18px;
+		height: 18px;
+	}
+	.file_main_list {
+		width: 968px;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		background-color: white;
+		margin: -5px auto;
+		border: 1px solid rgb(233, 233, 233);	
+	}
+	.file_main_list > div {
+		width: 968px;
+		height: 65px;
+		border-bottom: 1px solid rgb(233, 233, 233);
+	}
+	.file_main_list > div img {
+		width: 41px;
+		height: 41px;
+	}
+	.file_main_list > div > div > div:nth-child(1) {
+		position: relative;
+		top: 12px;
+		left: 7px;
+	}
+	.file_main_list > div > div > div:nth-child(2) {
+		position: relative;
+	}
+	.file_main_list > div  > div > div:nth-child(2) > span:first-child {
+		position: absolute;
+		top: 12px;
+		left: 18px;
+		font-size: 15px;
+		font-weight: 600;
+		width: 500px;
+	}
+	.file_main_list > div > div > div:nth-child(2) > span:last-child {
+		position: absolute;
+		top: 35px;
+		left: 18px;
+		font-size: 13px;
+		font-weight: 400;
+		color: rgb(97, 96, 97);
+		width: 500px;
+	}
+	.file_main_list > div > div > div:nth-child(3) > div {
+		width: 32px; 
+		height: 32px;
+		padding: 7px;
+		border-radius: 8px;
+		margin-right: 25px;
+		margin-top: 14px;
+	}
+	.trash_can {
+		width: 32px;
+		height: 32px;
+		padding: 7px;
+		border-radius: 8px;
+		margin-top: 14px;
+		margin-left: 6px;
+		}
+	.trash_can > svg {
+		width: 24px;
+		height: 24px;
+		}
+	.file_main_list > div > div > div:nth-child(3) > div:hover {
+		background-color: rgb(246, 246, 246);
+		cursor: pointer;
+	}
+	.file_main_list > div > div > div:nth-child(3) > div > svg {
+		width: 18px;
+		height: 18px;
+	}
+	#clean_filter { 
+		 width: 100vw;
+		 height: 100vh; 
+		 background-color: transparent; 
+		 z-index: 10; 
+		 position: absolute;
+	 }
+	 #file_black_filter { 
+	 		position: absolute; 
+	 		top: 0; 
+	 		left: 0; 
+	 		right: 0; 
+	 		bottom: 0; 
+	 		background-color: rgba(0, 0, 0, 0.5); 
+	 		z-index: 10;
+ 		}
+	#file_filter_popup_container {
+ 			width: 520px;
+			height: 389px;
+			position: absolute; 
+			border-radius: 8px;
+			box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+			top: 50%; left: 50%; 
+			transform: translate(-50%, -50%);
+			/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+			background-color: white; 
+			z-index: 20;
+	}
+		#file_filter_popup_container > div:first-child > div:first-child {/*필터링 기준*/
+ 			font-size: 22px;
+ 			font-weight: 600;
+ 			margin-top: 21px;
+ 			margin-left: 27px;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child {/*x 버튼컨테이너*/
+ 			width: 32px;
+ 			height: 32px;
+ 			padding: 6px 6px;
+ 			margin-right: 21px;
+ 			margin-top: -30px;
+ 			cursor: pointer;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child > svg {
+ 		 	width: 20px;
+ 		 	height: 20px;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child:hover {
+ 			border-radius: 4px;
+ 			background-color: rgb(238, 238, 238);
+ 		}
+ 		.file_filter_popup {
+ 			margin-left: 28px;
+ 			margin-top: 15px;
+ 		}
+ 		.file_filter_popup span { /*보낸 사람*/
+ 			font-size: 15px;
+ 			font-weight: 500;
+ 		}
+ 		.file_filter_popup > div:last-child {
+ 			width: 465px;
+ 			border: 1px solid rgba(94, 93, 96, 0.45);
+ 			border-radius: 8px;
+ 			margin-top: 9px;
+ 		}
+ 		.file_filter_popup > div:last-child > input[type='text']{
+ 			border: none;
+			outline: none;
+			background-color: transparent;
+			width: 463px;
+			height: 35px;
+			font-size: 15px;
+			line-height: 28px;
+			font-weight: 400;
+			color: rgb(29, 28, 29);
+			cursor: pointer;
+			padding-left: 13px;
+ 		}
+ 		.file_filter_popup > div:last-child:HAS(input:focus) {
+ 			box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+ 		}
+ 		.file_filter_popup_list_container {
+ 			width: 486px;
+ 			min-height: 120px;
+ 			position: absolute;
+ 			top: 130px;
+   			left: 17px;
+ 			z-index: 30;
+ 			padding: 12px 0;
+ 			border-radius: 8px;
+ 			border: 1px solid rgb(218, 218, 218);
+ 			background-color: rgb(248, 248, 248);
+ 		}
+ 		.to { 
+ 			top: 214px;
+   			left: 17px;
+		}
+ 		.file_filter_popup_list_container:nth-child {
+ 			top: 40px;
+   			left: 17px;
+ 		}
+ 		.file_filter_popup_list {
+ 			width: 484px;
+ 			min-height: 32px;
+ 			padding: 0 24px;
+ 			display: flex;
+ 			justify-content: flex-start;
+ 			align-items: center;
+ 			cursor: pointer;
+ 			position: relative;
+ 		}
+ 		.file_filter_popup_list:HAS(span.on) { /*이 리스트안에 span태그 중에 클래스 온 붙은애*/ 
+ 			color: rgb(46, 99, 158);	
+	 	}
+ 		.file_filter_popup_list:hover {
+ 			background-color: rgb(46, 99, 158);
+ 			color: white !important;
+ 		}
+ 		.file_filter_popup_list > div:first-child > img {
+ 			border-radius: 6px;
+ 			margin-right: 8px;
+ 			margin-top: 4px;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:first-child {
+ 			font-size: 15px;
+ 			font-weight: 600;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(2) {
+ 			width: 18px;
+ 			height: 18px;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(2) > path {
+ 			fill: rgb(32, 162, 113);
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(3) {
+ 			font-size: 15px;
+ 			font-weight: 300;
+ 		}
+ 		.file_filter_popup_date {
+ 			margin-left: 28px;
+ 			margin-top: 17px;
+ 		}
+ 		.file_filter_popup_date > span { /*날짜*/
+ 			font-size: 15px;
+ 			font-weight: 500;
+ 		}
+ 		.file_filter_popup_date > div:last-child {
+ 			width: 465px;
+			height: 35px;
+ 			border: 1px solid rgba(94, 93, 96, 0.45);
+ 			border-radius: 8px;
+ 			margin-top: 9px;
+			font-size: 15px;
+			line-height: 28px;
+			font-weight: 400;
+			color: rgb(29, 28, 29);
+			padding-left: 13px;
+			padding-top: 2px;
+			cursor: pointer;
+ 		}
+ 		.file_filter_popup_date > div:last-child:hover {
+ 			background-color: rgb(238, 238, 238);
+ 		}
+ 		.file_filter_popup_list_date_container {
+			width: 280px;
+			min-height: 180px;
+			border: 1px solid lightgrey;
+			border-radius: 6px;
+			padding: 12px 0;
+			position: absolute;
+			top: 156px;
+	    	left: 8px;
+			z-index: 50;
+			background-color: white;
+		}
+		.file_filter_popup_list {
+			width: 280px; 
+			height: 32px;
+			font-size: 15px;
+			font-weight: 400;
+			padding: 0 24px;
+		}
+		.file_filter_popup_list > svg { 
+			width: 16px;
+			height: 16px;
+			margin-left: 2px;		
+		}
+		#file_filter_popup_footer { width: 520px; height: 84px; padding: 24px 28px; }
+		.filter_reset_btn { 
+			width: 98px; 
+			height: 36px; 
+			padding: 5px 11px 0; 
+			border: 1px solid rgb(182, 182, 183); 
+			border-radius: 8px; 
+			background-color: white;
+			font-weight: 500;
+			font-size: 15px;
+			cursor: pointer;
+		}
+		.filter_next_btn { 
+			width: 80px; 
+			height: 36px; 
+			padding: 6px 24px 1px; 
+			border-radius: 8px; 
+			background-color: rgb(234, 234, 234);
+			cursor: pointer;
+			font-size: 15px;
+			font-weight: 500;
+			margin-left: 12px;
+		}
+		#file_black_filter { 
+	 		position: absolute; 
+	 		top: 0; 
+	 		left: 0; 
+	 		right: 0; 
+	 		bottom: 0; 
+	 		background-color: rgba(0, 0, 0, 0.5); 
+	 		z-index: 10;
+ 		}
+ 		#file_filter_popup_container {
+ 			width: 520px;
+			height: 389px;
+			position: absolute; 
+			border-radius: 8px;
+			box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+			top: 50%; left: 50%; 
+			transform: translate(-50%, -50%);
+			/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+			background-color: white; 
+			z-index: 20;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:first-child {/*필터링 기준*/
+ 			font-size: 22px;
+ 			font-weight: 600;
+ 			margin-top: 21px;
+ 			margin-left: 27px;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child {/*x 버튼컨테이너*/
+ 			width: 32px;
+ 			height: 32px;
+ 			padding: 6px 6px;
+ 			margin-right: 21px;
+ 			margin-top: -30px;
+ 			cursor: pointer;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child > svg {
+ 		 	width: 20px;
+ 		 	height: 20px;
+ 		}
+ 		#file_filter_popup_container > div:first-child > div:last-child:hover {
+ 			border-radius: 4px;
+ 			background-color: rgb(238, 238, 238);
+ 		}
+ 		.file_filter_popup {
+ 			margin-left: 28px;
+ 			margin-top: 15px;
+ 		}
+ 		.file_filter_popup span { /*보낸 사람*/
+ 			font-size: 15px;
+ 			font-weight: 500;
+ 		}
+ 		.file_filter_popup > div:last-child {
+ 			width: 465px;
+ 			border: 1px solid rgba(94, 93, 96, 0.45);
+ 			border-radius: 8px;
+ 			margin-top: 9px;
+ 		}
+ 		.file_filter_popup > div:last-child > input[type='text']{
+ 			border: none;
+			outline: none;
+			background-color: transparent;
+			width: 463px;
+			height: 35px;
+			font-size: 15px;
+			line-height: 28px;
+			font-weight: 400;
+			color: rgb(29, 28, 29);
+			cursor: pointer;
+			padding-left: 13px;
+ 		}
+ 		.file_filter_popup > div:last-child:HAS(input:focus) {
+ 			box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+ 		}
+ 		.file_filter_popup_list_container {
+ 			width: 486px;
+ 			min-height: 120px;
+ 			position: absolute;
+ 			top: 130px;
+   			left: 17px;
+ 			z-index: 30;
+ 			padding: 12px 0;
+ 			border-radius: 8px;
+ 			border: 1px solid rgb(218, 218, 218);
+ 			background-color: rgb(248, 248, 248);
+ 		}
+ 		.to { 
+ 			top: 214px;
+   			left: 17px;
+		}
+ 		.file_filter_popup_list_container:nth-child {
+ 			top: 40px;
+   			left: 17px;
+ 		}
+ 		.file_filter_popup_list {
+ 			width: 484px;
+ 			min-height: 32px;
+ 			padding: 0 24px;
+ 			display: flex;
+ 			justify-content: flex-start;
+ 			align-items: center;
+ 			cursor: pointer;
+ 			position: relative;
+ 		}
+ 		.file_filter_popup_list:HAS(span.on) { /*이 리스트안에 span태그 중에 클래스 온 붙은애*/ 
+ 			color: rgb(46, 99, 158);	
+	 	}
+ 		.file_filter_popup_list:hover {
+ 			background-color: rgb(46, 99, 158);
+ 			color: white !important;
+ 		}
+ 		.file_filter_popup_list > div:first-child > img {
+ 			border-radius: 6px;
+ 			margin-right: 8px;
+ 			margin-top: 4px;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:first-child {
+ 			font-size: 15px;
+ 			font-weight: 600;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(2) {
+ 			width: 18px;
+ 			height: 18px;
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(2) > path {
+ 			fill: rgb(32, 162, 113);
+ 		}
+ 		.file_filter_popup_list > div:nth-child(2) > span:nth-child(3) {
+ 			font-size: 15px;
+ 			font-weight: 300;
+ 		}
+ 		.file_filter_popup_date {
+ 			margin-left: 28px;
+ 			margin-top: 17px;
+ 		}
+ 		.file_filter_popup_date > span { /*날짜*/
+ 			font-size: 15px;
+ 			font-weight: 500;
+ 		}
+ 		.file_filter_popup_date > div:last-child {
+ 			width: 465px;
+			height: 35px;
+ 			border: 1px solid rgba(94, 93, 96, 0.45);
+ 			border-radius: 8px;
+ 			margin-top: 9px;
+			font-size: 15px;
+			line-height: 28px;
+			font-weight: 400;
+			color: rgb(29, 28, 29);
+			padding-left: 13px;
+			padding-top: 2px;
+			cursor: pointer;
+ 		}
+ 		.file_filter_popup_date > div:last-child:hover {
+ 			background-color: rgb(238, 238, 238);
+ 		}
+ 		.file_filter_popup_list_date_container {
+			width: 280px;
+			min-height: 180px;
+			border: 1px solid lightgrey;
+			border-radius: 6px;
+			padding: 12px 0;
+			position: absolute;
+			top: 156px;
+	    	left: 8px;
+			z-index: 50;
+			background-color: white;
+		}
+		.file_filter_popup_list {
+			width: 280px; 
+			height: 32px;
+			font-size: 15px;
+			font-weight: 400;
+			padding: 0 24px;
+		}
+		.file_filter_popup_list > svg { 
+			width: 16px;
+			height: 16px;
+			margin-left: 2px;		
+		}
+		#file_filter_popup_footer { width: 520px; height: 84px; padding: 24px 28px; }
+		.filter_reset_btn { 
+			width: 98px; 
+			height: 36px; 
+			padding: 5px 11px 0; 
+			border: 1px solid rgb(182, 182, 183); 
+			border-radius: 8px; 
+			background-color: white;
+			font-weight: 500;
+			font-size: 15px;
+			cursor: pointer;
+		}
+		.filter_next_btn { 
+			width: 80px; 
+			height: 36px; 
+			padding: 6px 24px 1px; 
+			border-radius: 8px; 
+			background-color: rgb(234, 234, 234);
+			cursor: pointer;
+			font-size: 15px;
+			font-weight: 500;
+			margin-left: 12px;
+		}
+		
+	 

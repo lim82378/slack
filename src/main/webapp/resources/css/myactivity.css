@@ -1,0 +1,409 @@
+@charset "UTF-8";
+	* { box-sizing: border-box; }
+	body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; }
+	.fl { float: left; }
+	.fr { float: right; }
+	#myactivity_header {
+		background-color: rgb(60, 10, 61);
+		width: 100%;
+		height: 40px;
+		display: flex;  /*검색창을 가운데로 오기위한 flex인데 flex 는 부모한테 줘야해서 여기다 줌*/
+		align-items: center;
+	}
+	#myactivity_header > div {  /*검색창 div*/
+		width: 674px; 
+		height: 28px; 
+	 	border-radius: 4px;
+		background-color: rgb(115, 70, 119);
+		margin-left: 398px;
+		display: flex;
+		align-items: center; /*돋보기랑 정처산기 span 위치조정 부모에다가 flex*/
+		color: white;
+		cursor: pointer;
+		
+	}
+	#myactivity_header > div > svg { 
+		width: 15px; 
+		height: 15px; 
+		opacity: 0.6; 
+		margin-left: 9px; 
+		margin-right: 7px;
+	}
+	#myactivity_header > div > span { font-size: 13px; font-weight: 400; }
+	#myactivity_sidebar {
+		background-color: rgb(60, 10, 61);
+		width: 80px;  /*사이즈 볼 때 컴퓨티드 보고 패딩, 마진 이런거 클릭해서 사이즈 찾기.*/
+		height: calc(100vh - 40px); /*상단 바의 height가 40px 이니깐 화면 비율 대비 calc 함수 써서 높이 구하기.*/
+		padding-top: 68px;
+	}
+	#myactivity_sidebar > div:first-child {  /*B2*/
+		position: absolute;
+		top: 47px;
+		width: 36px; 
+		height: 36px; 
+		margin-left: 16px; 
+		border-radius: 10px; 
+		background-color: rgb(133, 118, 135); 
+		color: rgb(39, 24, 44);
+		font-size: 20px;
+		font-weight: 600;
+		text-align: center;
+		line-height: 36px;   /*네모난 아이콘 안에서 위아래 높이를 flex를 쓰지 않고도 가능함.*/
+	}
+	#myactivity_sidebar > div:NOT(:first-child) { /*사이드바 첫번째 자식 : B2가 크기가 달라서 NOT을 줌*/
+		margin-left: 16px;
+		margin-bottom: 16px;  /* svg아이콘들끼리 간격조정을 위해 */
+		width: 36px;
+		height: 52px;
+		color: white;
+	}
+	#myactivity_sidebar > div:NOT(:first-child) > div:first-child { /*홈아이콘 div*/
+		width: 36px;
+		height: 36px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#myactivity_sidebar > div:NOT(:first-child):hover > div:first-child > svg { /* :hover 적용*/
+		width: 23px;
+		height: 23px;
+	}
+	#myactivity_sidebar > div.on:NOT(:first-child) > div:first-child { /* 아이콘 선택되어있을 때 회색 테두리 .on 으로옮겨다니면 됨*/
+		background-color: rgb(95, 53, 97);
+		border-radius: 8px;
+	}
+	#myactivity_sidebar > div:NOT(:first-child) > div:last-child {  /*아이콘 밑에 글자 홈*/
+		font-size: 11px;
+		line-height: 12px;
+		font-weight: 700;
+		text-align: center;
+		margin-top: 4px; /* 글자 div간의 간격 조정을 위해*/
+	}#myactivity_sidebar > div:NOT(:first-child) > div:first-child > svg { /*홈아이콘_svg*/
+		width: 20px;
+		height: 20px;
+		transition: all 0.2s ease-in-out;  /*hover 걸려서 아이콘 커질 때 자연스럽게 해줌 */
+	}
+	#myactivity_sidebar > div { cursor: pointer; }
+	#myactivity_side_menu {
+		width: 519px;
+		height: calc(100vh - 40px);
+		background-color: rgb(85, 38, 87);
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		margin-left: -10px;
+		overflow: auto;
+	}
+	#myactivity_side_menu > div:first-child {
+		width: 519px;
+		height: 80px;
+		border-bottom: 1px solid rgba(249, 237, 255, 0.22);
+	}
+	#myactivity_side_menu > div:first-child > span { /*내활동*/
+		color: white;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 49px;
+		margin-left: 20px;
+	}
+	#myactivity_side_menu > div:nth-child(2) {
+		width: 519px;
+		height: 595px;
+	}
+	.side_menu_content { /*사이드 메뉴 안에 각각의 채팅창을 담을 컨테이너*/
+		width: 519px;
+		height: 117px;
+	}
+	.content_from_user { /*채팅창 한개*/
+		width: 519px;
+		height: 90px;
+		padding: 12px 12px 14px;
+		border-bottom: 1px solid rgba(249, 237, 255, 0.22);
+		cursor: pointer;
+	}
+	.content_from_user.on { /*지금 선택하고 있는 채팅창*/
+		background-color: rgb(96, 54, 98);
+	}
+	.content_from_user > div:first-child > span:first-child {
+		position: relative;
+	}
+	.content_from_user > div:first-child > span:first-child > svg {
+		position: absolute;
+		top: 6.5px;
+		width: 13px;
+		height: 13px;
+		color: white;
+	}
+	.side_menu_content_where { /*어느 채팅방에서 날 초대/멘션 한건지*/
+		width: 118px;
+		height: 18px;
+		font-size: 13px;
+		color: white;
+		margin-left: 17px;
+	}
+	.side_menu_content_profile {  /*채팅방 상대방 프로필 이미지 컨테이너*/
+		width: 36px;
+	}
+	.side_menu_content_profile  img { /*모든채팅방 상대방 프로필 이미지*/
+		border-radius: 8px;
+		margin-top: 5px;
+	}
+	.side_menu_content_profile_name span { /*채팅창 상대방이름 / 내용*/
+		margin-left: 49px;
+	}
+	.side_menu_content_profile_name > div {
+		margin-left: 49px;
+	}
+	.side_menu_content_profile_name > div {
+		font-size: 15px;
+		font-weight: 700;
+		color: white;
+	}
+	.side_menu_content_profile_name > span:nth-child(2) {
+		font-size: 15px;
+		font-weight: 400;
+		color: #9ed6fa;
+		background-color: #ffc6002e;
+		margin-left: 12px;
+		text-align: center;
+		cursor: pointer;
+	}
+	.side_menu_content_profile_name > span:nth-child(3) {
+		position: absolute;
+	    left: 0px;
+	    top: 41px;
+		font-size: 15px;
+		font-weight: 200;
+		margin-left: 3px;
+		color: rgba(255, 255, 255, 1);
+	}
+	#myactivity_side_menu {
+		width: 519px;
+		height: calc(100vh - 40px);
+		background-color: rgb(85, 38, 87);
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		margin-left: -10px;
+		overflow: auto;
+	}
+	#myactivity_side_menu > div:first-child {
+		width: 519px;
+		height: 80px;
+		border-bottom: 1px solid rgba(249, 237, 255, 0.22);
+	}
+	#myactivity_side_menu > div:first-child > span {
+		color: white;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 49px;
+		margin-left: 20px;
+	}
+	#myactivity_side_menu > div:nth-child(2) {
+		width: 519px;
+		height: 595px;
+	}
+	.side_menu_content { /*사이드 메뉴 안에 각각의 채팅창을 담을 컨테이너*/
+		width: 519px;
+		height: 117px;
+	}
+	.content_from_user { /*채팅창 한개*/
+		width: 519px;
+		height: 110px;
+		padding: 12px 12px 14px;
+		border-bottom: 1px solid rgba(249, 237, 255, 0.22);
+	}
+	.content_from_user { /*보낸 날짜 스팬 위치때문에*/
+		position: relative;
+	}
+	.content_from_user:hover { /*채팅창 커서 올렸을 때*/
+		background-color: rgb(95, 53, 97);
+	}
+	.content_from_user > div:first-child > span:first-child {
+		position: relative;
+	}
+	.content_from_user > div:first-child > span:first-child > svg {
+		position: absolute;
+		top: 6.5px;
+		width: 13px;
+		height: 13px;
+		color: white;
+	}
+	.side_menu_content_where { /*채팅방에서 날 초대/멘션한 목록*/
+		width: 118px;
+		height: 18px;
+		font-size: 13px;
+		color: rgba(251, 251, 251, 0.8);
+		margin-left: 17px;
+	}
+	.side_menu_content_where+span { /*채팅방 목록 창에서 각각의 채팅방에 나오는 상대방이 나를 초대하거나 멘션한 날짜 스팬*/
+		position: absolute;
+		top: 20px;
+		right: 45px;
+		font-size: 13px;
+		color: rgba(251, 251, 251, 0.8);
+	}
+	.side_menu_content_profile {  /*채팅방 상대방 프로필 이미지 컨테이너*/
+		width: 36px;
+	}
+	.side_menu_content_profile  img { /*모든채팅방 상대방 프로필 이미지*/
+		border-radius: 8px;
+		margin-top: 5px;
+	}
+	.side_menu_content_profile_name span { /*채팅창 상대방이름 / 내용*/
+		margin-left: 49px;
+	}
+	.side_menu_content_profile_name > div {
+		margin-left: 49px;
+	}
+	.side_menu_content_profile_name > div {
+		font-size: 15px;
+		font-weight: 700;
+		color: white;
+	}
+	.side_menu_content_profile_name > span:nth-child(2) {
+		font-size: 15px;
+		font-weight: 400;
+		color: #9ed6fa;
+		background-color: #ffc6002e;
+		margin-left: 12px;
+		text-align: center;
+		cursor: pointer;
+	}
+	.side_menu_content_profile_name > span:nth-child(3) {
+		font-size: 15px;
+		font-weight: 200;
+		margin-left: 3px;
+		color: rgba(255, 255, 255, 1);
+	}
+	#myactivity_content {
+		width: calc( 100vw - 70px - 519px );
+		height: calc( 100vh - 40px );
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#myactivity_content > img {
+		width: 279px;
+		height: 246px;
+	}
+	.myactivity_chat1 {
+		width: calc( 100vw - 70px - 519px );
+		height: calc( 100vh - 40px );
+	}
+	.myactivity_chat1 > div:first-child {
+		position: relative;
+		height: 72px;
+		border-bottom: 1px solid rgba(29, 28, 29, 0.15);
+	}
+	.myactivity_chat1 > div:first-child > div:first-child {
+		margin-top: 15px;
+		margin-left: 56px;
+	}
+	.myactivity_chat1 > div:first-child span { /*전체채팅방*/
+		font-size: 18px;
+		font-weight: 550;
+		line-height: 1.3px;
+	}
+	.myactivity_chat1 button { /*X자 버튼*/
+		position: absolute;
+		right: 15px;
+		top: -4px;
+		width: 30px;
+		height: 30px;
+		background-color: white;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 8px;
+	}
+	.myactivity_chat1 button:hover { /*X자 버튼*/
+		background-color: #f8f8f8;	
+	}
+	.myactivity_chat1 button:nth-child(2) > svg {
+		width: 20px;
+		height: 20px;
+	}
+	.second_child { /*이미지,이름,시간 컨테이너*/
+		width: 100%;
+	}
+	.second_child > div:nth-child(1) {/*이미지 컨테이너*/
+		width: 36px;
+		margin-left: 21px;
+		margin-top: 4px;
+	}
+	.second_child img { /*프로필 이미지*/
+		border-radius: 8px;
+		margin-top: 5px;
+		cursor: pointer;
+	}
+	.chat_profile > div:nth-child(1) { /*상대방 이름 컨테이너*/
+		margin-left: 7px;
+		margin-top: 4px;
+	}
+	.chat_profile > div:nth-child(2) { /*시간 컨테이너*/
+		margin-left: 9px;
+		margin-top: 4px;
+	}
+	.chat_profile > div:nth-child(1) > span { /*상대방 이름*/
+		font-size: 15px;
+		font-weight: 500;
+	}
+	.chat_profile > div:nth-child(2) > span { /*시간*/
+		font-size: 12px;
+		font-weight: 300;
+		color: rgb(97, 96, 97);
+	}
+	.second_child { /*대화내용 위치때매 */
+		position: relative;
+	}
+	.second_child:hover {
+		background-color: rgba(240, 240, 240, 0.6);
+	}
+	.second_child > div:nth-child(4) { /*selec문 들어갈 내용*/
+		width: 100%;
+		position: absolute;
+		top: 27px;
+		left: 63px;
+		color: rgb(29, 28, 29);
+		font-size: 15px;
+		font-weight: 300;
+	}
+	.myactivity_chat1 > div:last-child { /*에디터 담는 컨테이너*/
+		width: 100%
+	}
+	.myactivity_chat1 > div:last-child > img { /*에디터이미지*/
+		margin: 0 25px;
+		width: 807px;
+		height: 118px;
+	}
+	.message_line {
+		position: relative;
+	}
+	.message_line > div {
+		width: calc(100vw - 70px - 519px);
+		margin-top: 40px;
+		padding: 11px 0;
+	}
+	.message_line > div > div {
+		position: absolute;
+		width: calc(100vw - 70px - 519px);
+		border-top: 1px solid rgb(221, 221, 221);
+	}
+	.message_line > button {
+		position: absolute;
+		width: 120px;
+		height: 28px;
+		left: 50%;
+		transform: translate(-50%, 0);
+		padding: 0 16px;
+		border-radius: 24px;
+		border: 1px solid rgba(29, 28, 29, 0.2);
+		background-color: white;
+		z-index: 2;
+		font-size: 13px;
+		font-weight: 650;
+		line-height: 27px;
+		box-shadow: 0 0 0 1px var(--saf-0),0 1px 3px 0 #00000014;
+	}
+	 

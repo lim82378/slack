@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DmMapper">
+	<!-- DAO에서 호출할 SQL쿼리문의 고유ID는 insertMember임 -->
+	<!-- 내 활동 목록 조회 / 채널 초대 기준. -->
+	<insert id="insertMention">
+		<![CDATA[
+		INSERT INTO mention (user_id, dm_idx, sent_time, user_mentioned, workspace_idx) 
+		VALUES (#{userId}, #{dmIdx}, SYSDATE, #{userMentioned}, #{workspaceIdx})
+		]]>
+	</insert>
+	<select id="selectDmListByContent" resultType="com.slack.dto.DmContentDto">
+		SELECT  S.dmTo, W.nickname, S.content, S.sentTime
+    FROM (
+        /* 1. 먼저 조건에 맞는 메시지들을 최신순으로 번호를 매김 */
+        SELECT 
+            CASE WHEN d.dm_from = #{dmFrom} THEN d.dm_to ELSE d.dm_from END AS dmTo,
+            d.content,
+            d.sent_time AS sentTime,
+            ROW_NUMBER() OVER (
+                PARTITION BY (CASE WHEN d.dm_from = #{dmFrom} THEN d.dm_to ELSE d.dm_from END) 
+                ORDER BY d.sent_time DESC
+            ) as rn
+        FROM dm d
+        WHERE d.workspace_idx = #{workspaceIdx}
+          AND d.content LIKE '%' || #{keyword} || '%'
+          AND (d.dm_from = #{dmFrom} OR d.dm_to = #{dmFrom})
+	    ) S
+	    JOIN workspace_users W ON S.dmTo = W.user_id
+	    WHERE S.rn = 1  /* 2. 각 상대방별로 가장 최근 메시지 딱 하나만 선택 */
+	    ORDER BY S.sentTime DESC
+	</select>
+	<insert id="insertDm" parameterType="com.slack.dto.DmListDto">
+		<selectKey keyProperty="dmIdx" resultType="int" order="BEFORE">
+	        SELECT SEQ_DM_IDX.NEXTVAL FROM DUAL
+	    </selectKey>
+		INSERT INTO dm (dm_idx, dm_from, dm_to, content,
+		sent_time, workspace_idx, file_idx)
+		VALUES (#{dmIdx}, #{dmFrom},
+		#{dmTo}, #{content},SYSDATE,
+		#{workspaceIdx}, #{fileIdx, jdbcType=INTEGER})
+	</insert>
+	<insert id="insertReserveDm">
+		INSERT INTO dm (dm_idx, dm_from, dm_to, content,
+		sent_time, rev_time, workspace_idx)
+		VALUES (SEQ_DM_IDX.NEXTVAL,
+		#{dmFrom}, #{dmTo}, #{content},SYSDATE,
+		TO_DATE(#{revTime}, 'YYYY/MM/DD
+		hh24:mi:ss'), #{workspaceIdx})
+	</insert>
+	<select id="selectFromToByDmIdx" resultType="com.slack.dto.DmDetailListDto">
+		SELECT dm_from dmFrom, dm_to dmTo, workspace_idx
+		workspaceIdx
+		FROM dm
+		WHERE dm_idx = #{dmIdx}
+	</select>
+	<select id="selectDmDetail" resultType="com.slack.dto.DmListDto">
+		SELECT 
+		d.dm_idx dmIdx,
+		d.content, 
+		d.dm_from dmFrom, 
+		d.dm_to dmTo, 
+		d.rev_time revTime,
+		f.file_name fileName,
+		d.sent_time sentTime,
+		d.workspace_idx workspaceIdx
+		FROM dm d LEFT OUTER JOIN mention m
+		ON d.dm_idx = m.dm_idx
+		lEFT OUTER JOIN files f
+		ON d.file_idx = f.file_idx
+		WHERE ((d.dm_from =
+		#{dmFrom} AND d.dm_to = #{dmTo})
+		OR (d.dm_from = #{dmTo} AND d.dm_to =
+		#{dmFrom}))
+		AND d.workspace_idx = #{workspaceIdx}
+		ORDER BY d.dm_idx 
+	</select>
+	<select id="selectUserIdFromDm" resultType="com.slack.dto.DmWorkspaceUsersDto">
+		SELECT DISTINCT
+		d.dm_from dmFrom,
+		d.dm_to dmTo
+		FROM dm d
+		WHERE
+		(d.dm_from = #{dmFromTo} OR d.dm_to = #{dmFromTo}) AND
+		d.workspace_idx = #{workspaceIdx}
+	</select>
+	<select id="selectDmList" resultType="com.slack.dto.DmDto">
+		SELECT *
+		FROM (
+		SELECT dm_idx
+		dmIdx, dm_from dmFrom, dm_to dmTo, content, sent_time sentTime
+		FROM dm
+		WHERE workspace_idx = 1
+		AND (dm_from = #{a} AND dm_to = #{b})
+		OR
+		(dm_from = #{b} AND dm_to = #{a})
+		ORDER BY dm_idx DESC
+		)
+		WHERE rownum = 1
+	</select>
+	<select id="selectInfoFromWorkspaceUsers" resultType="com.slack.dto.WorkspaceUsersDto">
+		SELECT profile_image profileImage, nickname
+		FROM
+		workspace_users
+		WHERE user_id = #{userId}
+		AND workspace_idx =
+		#{workspaceIdx}
+	</select>
+	<select id="selectUsersFromNewDm" resultType="com.slack.dto.DmUsersDto">
+		SELECT w.nickname,u.name,w.profile_image profileImage,w.user_id userId 
+		FROM workspace_users w
+		JOIN users u ON w.user_id = u.user_id
+		WHERE w.user_id != #{userId}
+		AND  w.workspace_idx = #{workspaceIdx} 
+	</select>
+	<select id="selectUsersDm" resultType="java.lang.String">
+		SELECT nickname
+		FROM workspace_users
+		WHERE user_id = #{userId} 
+		AND workspace_idx = #{workspaceIdx}
+	</select>
+	<select id="selectDmMax" resultType="java.lang.Integer">
+		SELECT max(dm_idx)
+		FROM dm
+		WHERE ((dm_from = #{dmFrom} AND dm_to = #{dmTo})
+		OR (dm_from = #{dmTo} AND dm_to = #{dmFrom}))
+		AND workspace_idx = #{workspaceIdx}
+	</select>
+	<update id="updateDmIdxToFiles">
+		UPDATE files
+		SET dm_idx = #{dmIdx}
+		WHERE file_name = #{fileName}
+	</update>
+</mapper>
+
+
+

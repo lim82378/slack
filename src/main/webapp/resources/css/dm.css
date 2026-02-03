@@ -1,0 +1,970 @@
+@charset "UTF-8";
+* { box-sizing: border-box; }
+	body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif;}
+	.fl { float: left; }
+	.fr { float: right; }
+	#header {
+		background-color: rgb(60, 10, 61);
+		width: 100%;
+		height: 40px;
+		display: flex;  /*검색창을 가운데로 오기위한 flex인데 flex 는 부모한테 줘야해서 여기다 줌*/
+		align-items: center;
+	}
+	#header > div {  /*검색창 div*/
+		width: 674px; 
+		height: 28px; 
+	 	border-radius: 4px;
+		background-color: rgb(115, 70, 119);
+		margin-left: 398px;
+		display: flex;
+		align-items: center; /*돋보기랑 정처산기 span 위치조정 부모에다가 flex*/
+		color: white;
+		cursor: pointer;
+	
+	}
+	#header > div > svg { 
+		width: 15px; 
+		height: 15px; 
+		opacity: 0.6; 
+		margin-left: 9px; 
+		margin-right: 7px;
+	}
+	#header > div > span { font-size: 13px; font-weight: 400; }
+	#dm_sidebar {
+		background-color: rgb(60, 10, 61);
+		width: 80px;  /*사이즈 볼 때 컴퓨티드 보고 패딩, 마진 이런거 클릭해서 사이즈 찾기.*/
+		height: calc(100vh - 40px); /*상단 바의 height가 40px 이니깐 화면 비율 대비 calc 함수 써서 높이 구하기.*/
+		padding-top: 68px;
+	}
+	#dm_sidebar > div:first-child {  /*B2*/
+		position: absolute;
+		top: 47px;
+		width: 36px; 
+		height: 36px; 
+		margin-left: 16px; 
+		border-radius: 10px; 
+		background-color: rgb(133, 118, 135); 
+		color: rgb(39, 24, 44);
+		font-size: 20px;
+		font-weight: 600;
+		text-align: center;
+		line-height: 36px;   /*네모난 아이콘 안에서 위아래 높이를 flex를 쓰지 않고도 가능함.*/
+	}
+	#dm_sidebar > div:NOT(:first-child) { /*사이드바 첫번째 자식 : B2가 크기가 달라서 NOT을 줌*/
+		margin-left: 16px;
+		margin-bottom: 16px;  /* svg아이콘들끼리 간격조정을 위해 */
+		width: 36px;
+		height: 52px;
+		color: white;
+	}
+	#dm_sidebar > div:NOT(:first-child) > div:first-child { /*홈아이콘 div*/
+		width: 36px;
+		height: 36px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#dm_sidebar > div:NOT(:first-child):hover > div:first-child > svg { /* :hover 적용*/
+		width: 23px;
+		height: 23px;
+	}
+	#dm_sidebar > div.on:NOT(:first-child) > div:first-child { /* 아이콘 선택되어있을 때 회색 테두리 .on 으로옮겨다니면 됨*/
+		background-color: rgb(95, 53, 97);
+		border-radius: 8px;
+	}
+	#dm_sidebar > div:NOT(:first-child) > div:last-child {  /*아이콘 밑에 글자 홈*/
+		font-size: 11px;
+		line-height: 12px;
+		font-weight: 700;
+		text-align: center;
+		margin-top: 4px; /* 글자 div간의 간격 조정을 위해*/
+	}
+	#dm_sidebar > div:NOT(:first-child) > div:first-child > svg { /*홈아이콘_svg*/
+		width: 20px;
+		height: 20px;
+		transition: all 0.2s ease-in-out;  /*hover 걸려서 아이콘 커질 때 자연스럽게 해줌 */
+	}
+	#dm_sidebar > div { cursor: pointer; }
+	#dm_side_menu {
+		width: 519px;
+		height: calc(100vh - 40px);
+		background-color: rgb(85, 38, 87);
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		margin-left: -10px;
+		overflow: auto;
+	}
+	#dm_side_menu > div:first-child {
+		width: 519px;
+		height: 80px;
+	}
+	#dm_side_menu > div:first-child > span { /*다이렉트 메시지*/
+		color: white;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 49px;
+		margin-left: 20px;
+	}
+	#dm_side_menu > div:first-child > div { /*아이콘 컨테이너*/
+		width: 36px;
+		height: 36px;
+		border-radius: 8px;
+		margin-right: 8px;
+		margin-top: 6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#dm_side_menu > div:first-child > div:hover {
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+	#dm_side_menu > div:first-child > div > svg { /*새메시지 아이콘*/
+		width: 20px;
+		height: 20px;
+		color: rgba(249, 237, 255, 0.8);
+		cursor: pointer;
+	}
+	#dm_side_menu > div:nth-child(2) {
+		background-color: rgb(105, 69, 119);
+		width: 487px;
+		height: 36px;
+		color: rgba(249, 237, 255, 0.4);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		border-radius: 8px;
+		margin: 0 auto;
+		margin-top: -24px;
+		margin-bottom: 9px;
+		padding: 0 16px 0 35px;
+		position: relative;
+	}
+	#dm_side_menu > div:nth-child(2) > span > svg {
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 8px;	
+		left: 13px;
+	}
+	#dm_side_menu > div:nth-child(2):HAS(input:focus) {
+		box-shadow: 0 0 0 1px rgb(255, 255, 255), 0 0 0 5px color-mix(in srgb, rgb(255, 255, 255) 30%, transparent);
+	}
+	#dm_side_menu  input[type='text'] {
+		border: none;
+		outline: none;
+		background-color: transparent;
+		width: 457px;
+		height: 36px;
+		font-size: 16px;
+		line-height: 36px;
+		font-weight: 300;
+		margin-left: 4px;
+		margin-top: 2px;
+		color: white;
+	}
+	#dm_side_menu > div:nth-child(2) > input[type='text']::placeholder {
+		font-size: 15px;
+		line-height: 28px;
+		font-weight: 400;
+		position: absolute;
+		color: rgba(255, 255, 255, 0.3);
+		top: 9px;
+	}
+	.dm_message_content { /*채팅목록 한줄 을 감싸는 컨테이너*/
+		width: 519px;
+		height: 73px;
+		padding: 15px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+		cursor: pointer;
+	}
+	.dm_message_content.on { /*지금 선택한 채팅창*/
+		background-color: rgb(96, 54, 98);
+	}
+	.dm_message_content:hover { /*채팅창 위에 커서 올라갔을 때*/
+		background-color: rgb(96, 54, 98);
+	}
+	.dm_message_content > div > div:first-child {
+		width: 36px;
+		height: 36px;
+		margin-left: 15px;	
+		position: relative;
+	}
+	.dm_message_content > div > div:first-child > img {
+		border-radius: 8px;
+	}
+	.dm_message_content > div > div:first-child > svg {
+		width: 22px;
+		height: 22px;
+		position: absolute;
+		top: 22px;
+		left: 22px;
+	}
+	.dm_message_content > div > div:first-child > svg > path {
+		fill: rgb(32, 162, 113);
+	}
+	.dm_message_content > div > div:nth-child(2) {
+		position: relative;
+		width: 450px;
+		max-height: 65px;
+		overflow: hidden;
+	}
+	.dm_message_content > div > div:nth-child(2) > span:first-child {
+		color: white;
+		font-weight: 700;
+		position: absolute;
+		left: 10px;
+	}
+	.dm_message_content > div > div:nth-child(2) > span:nth-child(2) {
+		color: rgba(249, 237, 255, 0.8);
+		font-size: 13px;
+		position: absolute;
+		left: 382px;
+	}
+	.dm_message_content > div > div:nth-child(2) > div {
+		margin-top: 23px;
+		margin-left: 10px;
+		color: rgba(255, 255, 255, 0.9);
+		font-weight: 300;
+	}
+	#dm_not_content {
+		width: calc( 100vw - 70px - 519px );
+		height: calc( 100vh - 40px );
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#dm_not_content > img {
+		width: 279px;
+		height: 246px;
+	}
+	.dm_main_content {
+		width: calc( 100vw - 70px - 519px );
+		height: calc( 100vh - 40px );
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	.dm_main_content > div:first-child {
+		position: relative;
+		height: 72px;
+		border-bottom: 1px solid rgba(29, 28, 29, 0.15);
+	}
+	.dm_main_content > div:first-child > div:first-child {
+		margin-top: 15px;
+		margin-left: 52px;
+		position: relative;
+	}
+	.dm_main_content > div:first-child > div:first-child img {
+		width: 24px;
+		height: 24px;
+		border-radius: 6px;
+	}
+	.dm_main_content > div:first-child > div:first-child svg {
+		width: 18px;
+		height: 18px;
+		position:absolute;
+		top: 12px;
+		left: 13px;
+		
+	}
+	.dm_main_content > div:first-child > div:first-child svg > path {
+		fill: rgb(32, 162, 113);
+	}
+	.dm_main_content > div:first-child > div:first-child span { /*재준*/
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 1.3px;
+		position: absolute;
+    	top: 12px;
+    	left: 32px;
+	}
+	.dm_main_content > div:first-child button { /*X자 버튼*/
+		position: absolute;
+		right: 15px;
+		top: -4px;
+		width: 30px;
+		height: 30px;
+		background-color: white;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 8px;
+	}
+	.dm_main_content > div:first-child button:hover { /*X자 버튼*/
+		background-color: #f8f8f8;	
+	}
+	.dm_main_content button:nth-child(2) > svg {
+		width: 20px;
+		height: 20px;
+	}
+	.dm_main_profile > div:first-child {
+		margin-top: 40px;
+    	margin-left: 20px;
+    	width: 150px;
+    	position: relative;
+	}
+	.dm_main_profile > div:first-child > img { /*채팅 시작 전 뜨는 큰 프로필 이미지*/
+		border-radius: 12px;
+	}
+	.dm_main_profile > div:first-child > span { /*채팅 시작전 뜨는 프로필의 재준 */
+		font-size: 18px;
+		position: absolute;
+		top: 37px;
+		left: 113px;
+	}
+	.dm_main_profile > div:nth-child(2) {
+		margin-top: 80px;
+	}
+	.dm_main_profile > div:nth-child(2) > svg {
+		width: 20px;
+		height: 20px;
+	}
+	.dm_main_profile > div:nth-child(2) > svg > path {
+		fill: rgb(32, 162, 113);
+	}
+	.dm_main_content > div:nth-child(3) { /*이 대화는 나와 ??님간의 대화입니다 가 담긴 컨테이너 */
+		font-size: 17.6px;
+		font-weight: 300;
+	    margin-top: 11px;
+    	margin-left: 18px;
+	}
+	.dm_main_content > div:nth-child(3) > span {
+		color: #1264A3;
+		background-color: #1D9BD11A;
+		cursor: pointer;
+	}
+	.dm_main_content > div:nth-child(3) > span:hover {
+		background-color: rgb(219, 235, 245);
+	}
+	.dm_main_content > div:nth-child(4) {	
+	    margin-left: 18px;
+    	margin-top: 16px;
+	}
+	.dm_main_content > div:nth-child(4) > button { /*프로필 보기 버튼*/
+		width: 110px;
+		height: 36px;
+		background-color: white;
+		border-radius: 8px;
+		border: 1px solid #5e5d6073;
+		font-size: 15px;
+		font-weight: 700;
+		text-align: center;
+		padding: 3px 12px 1px;
+		cursor: pointer;
+	}
+	.dm_main_content > div:nth-child(4) > button:hover {
+		background-color: rgb(248, 248, 248);
+	}
+	.dm_message_line {
+		position: relative;
+	}
+	.dm_message_line > div {
+		width: calc(100vw - 70px - 519px);
+		margin-top: 40px;
+		padding: 11px 0;
+	}
+	.dm_message_line > div > div {
+		position: absolute;
+		width: calc(100vw - 70px - 519px);
+		border-top: 1px solid rgb(221, 221, 221);
+	}
+	.dm_message_line > button { /*날짜표시버튼*/
+		position: absolute;
+		top: -2px;
+		width: 120px;
+		height: 28px;
+		left: 50%;
+		transform: translate(-50%, 0);
+		padding: 0 16px;
+		border-radius: 24px;
+		border: 1px solid rgba(29, 28, 29, 0.2);
+		background-color: white;
+		z-index: 2;
+		font-size: 13px;
+		font-weight: 650;
+		line-height: 27px;
+		box-shadow: 0 0 0 1px var(--saf-0),0 1px 3px 0 #00000014;
+	}
+	.second_child img { /*프로필 이미지*/
+		border-radius: 8px;
+		margin-top: 5px;
+		width: 60px;
+	}
+	.second_child > div:nth-child(2) > div:nth-child(1) {
+		margin-left: 7px;
+		margin-top: 4px;
+	}
+	.second_child > div:nth-child(2) > div:nth-child(1) > span {
+		font-size: 15px;
+		font-weight: 500;
+	}
+	.second_child > div:nth-child(2) > div:nth-child(2){
+		margin-left: 9px;
+		margin-top: 4px;
+	}
+	.second_child > div:nth-child(2) > div:nth-child(2) > span {
+		font-size: 12px;
+   		font-weight: 300;
+   		color: rgb(97, 96, 97);
+	}
+	.second_child { /*대화내용 위치때매 */
+		position: relative;
+		width: 100%;
+	}
+	.second_child:hover {
+		background-color: rgba(240, 240, 240, 0.6);
+	}
+	.second_child > div:nth-child(4) { /*selec문 들어갈 내용*/
+		width: 100%;
+		/* position: absolute;
+		top: 27px;
+		left: 63px; */
+		max-height: 80px;
+		overflow: hidden;
+		color: rgb(29, 28, 29);
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 40px;
+	}
+	.second_child_file { /*이미지,이름,시간 컨테이너*/
+		width: 100%;
+	}
+	.second_child_file > div:nth-child(1) {/*이미지 컨테이너*/
+		width: 36px;
+		margin-left: 21px;
+		margin-top: 4px;
+	}
+	
+	.second_child_file img { /*프로필 이미지*/
+		border-radius: 8px;
+		margin-top: 5px;
+		cursor: pointer;
+	}
+	.second_child_file > div:nth-child(2) > div:nth-child(1) {
+		margin-left: 7px;
+		margin-top: 4px;
+	}
+	.second_child_file > div:nth-child(2) > div:nth-child(1) > span {
+		font-size: 15px;
+		font-weight: 500;
+	}
+	.second_child_file > div:nth-child(2) > div:nth-child(2){
+		margin-left: 9px;
+		margin-top: 4px;
+	}
+	.second_child_file > div:nth-child(2) > div:nth-child(2) > span {
+		font-size: 12px;
+   		font-weight: 300;
+   		color: rgb(97, 96, 97);
+	}
+	.second_child_file { /*대화내용 위치때매 */
+		position: relative;
+	}
+	.second_child_file:hover {
+		background-color: rgba(240, 240, 240, 0.6);
+	}
+	.second_child_file > div:nth-child(4) { /*selec문 들어갈 내용*/
+		width: 100%;
+		top: 27px;
+		left: 63px;
+	    margin-left: 65px;
+   		margin-top: -19px;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(1) {
+		position: relative;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(1) > span { /*홈화면 png*/
+		color: rgba(29, 28, 29, 0.7);
+		font-size: 13px;
+		font-weight: 400;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(1) > svg { /*홈화면 글씨 옆 삼각형*/
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 5px;
+		left: 65px;
+		cursor: pointer;
+	}.second_child_file > div:nth-child(4) > div:nth-child(2) > div { /*보낸 파일위에 뜨는 다운로드, 공유하기 컨테이너*/
+		width: 104px;
+		height: 40px;
+		border-radius: 12px;
+		background-color: rgb(255, 255, 255);
+		border: 1px solid rgb(221, 220, 221);
+		padding: 4px;
+		position: relative;
+		margin-left: 20px;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:first-child {/*다운로드 svg 컨테이너*/
+		width: 32px;
+		height: 32px;
+		padding: 7px;
+		position: absolute;
+		left: 15px;
+		cursor: pointer;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:last-child {/*공유하기 svg 컨테이너*/
+		width: 32px;
+		height: 32px;
+		padding: 7px;
+		position: absolute;
+		left: 55px;
+		cursor: pointer;
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:first-child:hover { /*다운로드 svg 컨테이너*/
+		border-radius: 8px;
+		width: 32px;
+		height: 32px;
+		background-color: rgb(246, 246, 246);
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:last-child:hover { /*공유하기 svg 컨테이너*/
+		border-radius: 8px;
+		width: 32px;
+		height: 32px;
+		background-color: rgb(246, 246, 246);
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:first-child > svg { /*다운로드*/
+		width: 18px;
+		height: 18px;
+		color: rgb(97, 96, 97);
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > div > div:last-child > svg { /*공유하기*/
+		width: 18px;
+		height: 18px;
+		color: rgb(97, 96, 97);
+	}
+	.second_child_file > div:nth-child(4) > div:nth-child(2) > img {
+		width: 100px;
+		height: 100px;
+	}
+	.dm_editor {
+		width: 100%;
+	}
+	.dm_editor > img {
+		margin: 0 25px;
+		width: 807px;
+		height: 118px;
+	}
+	.ql-editor img {
+		max-width: 100px !important; /* 에디터 너비를 넘지 않게 함 */
+		height: auto;    /* 비율 유지 */
+	}
+	#new_message {
+		width: calc( 100vw - 70px - 519px );
+		height: calc( 100vh - 40px );
+	}
+	#new_message > div {
+		width: 847px;
+		height: 94px;
+	}
+	#new_message > div > div {
+		display: flex;
+	/* 	justify-content: space-between; */
+		align-items: center;
+		margin-top: 20px;
+		position: relative;
+	}
+	.new_message_input[type='text'] { 
+		width: 790px; 
+		height: 20px;
+		background-color: white;
+		outline: none;
+		border: none; 
+		font-size: 15px;
+	}
+	.new_message_input[type='text']::placeholder {
+		font-size: 15px;
+	}
+	#new_message > div > div:first-child > span:first-child {
+		font-size: 18px;
+		font-weight: 600;
+		text-align: left;
+		margin-left: 15px;
+	}
+	#new_message > div > div:first-child > span:last-child {
+		position: absolute;
+		right: 20px;
+		top: 6px;
+		cursor: pointer;
+	}
+	#new_message > div > div:first-child > span:last-child > svg { /*x버튼*/
+		width: 18px;
+		height: 18px;
+		color: #454447;
+	}
+	#new_message > div > div:nth-child(2) > div {
+		width: 847px;
+		font-size: 15px;
+		font-weight: 300;
+		color: #5e5d60;
+		margin-top: 5px;
+		margin-left: 15px;
+		cursor: pointer;
+	}
+	#new_message > div > div:nth-child(3) {
+		width: 847px;
+		min-height: 320px;
+		border-top: 1px solid rgb(210, 210, 210);
+		position: relative;
+	}
+	#new_message > div > div:nth-child(3) > img {
+		position: absolute;
+		width: 847px;
+		height: 118px;
+		left: 2px;
+		bottom: -105px;
+	} 
+	#new_message_list_container { 
+		width: 684px; 
+		min-height: 50px; 
+		background-color: rgb(248, 248, 248);
+		border-radius: 8px;
+		position: absolute;
+		border: 1px solid rgb(223, 223, 223);
+		padding: 12px 0;
+		right: 72px;
+    	top: 127px;
+    	z-index: 20;
+    	display :flex;
+    	flex-direction: column;
+	}
+	.new_message_list {
+		width: 683px;
+		height: 32px;
+		cursor: pointer;
+		display: flex;
+    	align-items: center;
+	}
+	.new_message_list:hover {
+		background-color: rgb(46, 99, 158);
+		color: white;
+	}
+	.new_message_list > div:nth-child(2) {
+		display: flex;
+		align-items: center;
+		line-height: 28px;
+		margin-left: 38px;
+	}
+	.new_message_list span {
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 14px;
+	}
+	.new_message_list svg {
+		width: 18px;
+		height: 18px;
+		margin-left: 24px;
+    	margin-top: 4px;
+	}
+	.new_message_list img {
+		border-radius: 6px;
+		margin-left: 24px;
+		margin-top: 4px;
+	}
+	#dm_black_filter { 
+		position: absolute; 
+		top: 0; 
+		left: 0; 
+		right: 0; 
+		bottom: 0; 
+		background-color: rgba(0, 0, 0, 0.5); 
+		z-index: 10;
+	}
+	#dm_popup_share_file{
+		width: 520px;
+		height: 594px;
+		position: absolute; 
+		border-radius: 8px;
+		box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+		top: 50%; left: 50%; 
+		transform: translate(-50%, -50%);
+		/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+		background-color: white; 
+		z-index: 20;
+	}
+	#dm_popup_share_file > div:nth-child(1) > div:first-child { /*파일공유*/
+		width: 520px;
+		height: 70px;
+		color: rgb(29, 28, 29);
+		font-size: 22px;
+		font-weight: 700;
+	    margin-left: 27px;
+   		margin-top: 30px;
+	}
+	#dm_popup_share_file > div:nth-child(1) > div:last-child { /*x버튼 컨테이너*/
+		width: 32px;
+		height: 32px;
+		padding: 6px 6px;
+		margin-right: 21px;
+		margin-top: -30px;
+		cursor: pointer;
+		position: absolute; 
+	    right: 10px;
+   	 	top: 61px;
+	}
+	#dm_popup_share_file > div:nth-child(1) > div:last-child:hover {
+		background-color: rgb(238, 238, 238);
+		border-radius: 4px;
+	}
+	#dm_popup_share_file > div:nth-child(1) > div:last-child > div > svg {
+		width: 20px;
+		height: 20px;
+	}
+	#dm_popup_share_file > div:nth-child(2) { /*노란색 컨테이너*/
+		width: 464px;
+		height: 54px;
+		background-color: rgba(255, 198, 0, 0.18);
+		border-radius: 8px;
+		margin: -20px auto -20px;
+		padding: 4px 8px;
+	}
+	#dm_popup_share_file > div:nth-child(2) > span { /*노란색 컨테이너 안의 텍스트*/
+		width: 430px; 
+		height: 36px;
+		font-size: 13px;
+		font-weight: initial;
+	}
+	#dm_popup_share_file > div:nth-child(3) > div:last-child {
+		margin-bottom: 66px;
+	}
+	#dm_popup_share_file > div:nth-child(3) > div:last-child > img{ /*에디터 이미지*/
+		width: 464px;
+		height: 162px;
+		margin-left: 27px;
+		margin-bottom: -57px;
+	}
+	.dm_popup_input {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.dm_popup_input > div {
+		position: relative;
+		width: 464px;
+		height: 36px;
+		border: 1px solid rgba(94, 93, 96, 0.45);
+   		border-radius: 8px;
+   		margin-bottom: 16px;
+   		margin-top: 38px;
+	}
+	.dm_popup_input > div:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	.dm_popup_input  > div > input[type='text']{
+		border: none;
+		outline: none;
+		background-color: transparent;
+		width: 500px;
+		font-size: 15px;
+		line-height: 28px;
+		font-weight: 400;
+		color: rgb(29, 28, 29);
+		cursor: pointer;
+	}
+	.dm_popup_input > div > input[type='text']::placeholder{
+		position: absolute;
+		top: 5px;
+		left: 14px;
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#dm_popup_share_file > div:nth-child(4) { /*공유할 파일 미리보기 컨테이너*/
+		width: 464px;
+		height: 124px;
+		margin: 0 auto;
+	}
+	.dm_popup_small_image { /*미리보기 이미지랑 텍스트 담는 컨테이너*/
+		width: 464px;
+		height: 62px;
+		border: 1px solid rgba(29, 28, 29, 0.1);
+		border-radius: 12px;
+	}
+	.dm_popup_small_image > div:first-child > img { /*작은 미리보기 이미지*/
+		width: 36px;
+		height: 36px;
+		margin-left: 12px;
+		margin-top: 12px;
+	}
+	.dm_popup_small_image > div:last-child { /*스팬을 담고있는 컨테이너*/
+		position: relative;
+		width: 390px;
+		height: 36px;
+		margin-top: 7px;
+	}
+	.dm_popup_small_image > div:last-child > span:first-child { /*image.png*/
+		font-size: 15px;
+		font-weight: 500;
+		color: #1d1c1d;
+		margin-left: 11px;
+		border-radius: 8px;
+	}
+	.dm_popup_small_image > div:last-child > span:NOT(:first-child) {
+		color: #616061;
+		font-size: 13px;
+		font-weight: 300;
+	}
+	.dm_popup_small_image > div:last-child > span:nth-child(2) {
+		position: absolute;
+		top: 24px;
+   		left: 11px;
+	}
+	.dm_popup_small_image > div:last-child > span:nth-child(3) {
+		position: absolute;
+		top: 24px;
+   		left: 44px;
+	}
+	#dm_popup_share_file > div:nth-child(4) > div:nth-child(3) { 
+		position: relative;
+		width: 464px;
+		height: 46px;
+		background-color: rgba(29, 28, 29, 0.06);
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		margin: 17px auto 0;
+	}
+	#dm_popup_share_file > div:nth-child(4) > div:nth-child(3) > span { /*2명의 사용자가 엑세스*/
+		position: absolute;
+		top: 10px;
+		left: 14px;
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 22px;
+	}
+	#dm_popup_share_file > div:last-child { 
+		width: 520px;
+		height: 84px;
+		padding: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	#dm_popup_share_file > div:last-child > div { /*링크복사 컨테이너*/
+		position: relative;
+		margin-left: 32px;
+		margin-top: 8px;
+	}
+	#dm_popup_share_file > div:last-child > div:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	#dm_popup_share_file > div:last-child > div > span:first-child > svg { /*링크복사 아이콘*/
+		width: 15px;
+		height: 15px;
+		color: rgb(18, 100, 163);
+		position: absolute;
+		top: 7px;
+   		left: -19px;
+	}
+	#dm_popup_share_file > div:last-child > div > span:nth-child(2) {
+		color: rgb(18, 100, 163);
+		font-size: 15px;
+		font-weight: 300;
+	}
+	#dm_popup_share_file > div:last-child > button { /*전달 버튼*/
+		width: 80px;
+		height: 36px;
+		background-color: rgb(0, 122, 90);
+		color: white;
+		border-radius: 8px;
+		cursor: pointer; 
+		border: none;
+	    margin-right: 13px;
+	    margin-top: 15px;
+   		font-size: 15px;
+   		font-weight: 700;
+	}
+	.dm_popup_input+div { /*인풋 텍스트 클릭하면 뜨는 창*/
+		width: 486px;
+		height: 224px;
+		background-color: rgb(247, 247, 247);
+		border-radius: 6px;
+		box-shadow: rgba(29, 28, 29, 0.13) 0px 0px 0px 1px, rgba(0, 0, 0, 0.12) 0px 5px 10px 0px;
+		z-index: 20;
+		overflow: auto;
+		padding: 12px 0;
+		position: absolute;
+		top: 185px;
+		left: 16px;
+	}
+	.to_share_file { /*파일 공유하는 사용자 한 줄*/
+		width: 471px;
+		height: 32px;
+		background-color: rgb(248, 248, 248);
+		padding: 0 24px;
+		position: relative;
+		margin: 0 auto;
+		cursor: pointer;
+	}
+	.to_share_file:hover {
+		background-color: rgb(46, 99, 158);
+		color: white;
+	}
+	.to_share_file > span:first-child { /*프로필 이미지*/
+		position: absolute;
+		left: 28px;
+		top: 4px;
+	}
+	.to_share_file > span:first-child > img {
+		border-radius: 6px;
+	}
+	.to_share_file > span:nth-child(2) { /*민재*/
+		font-size: 15px;
+		font-weight: 700;
+		position: absolute;
+		left: 57px;
+		top: 3px;
+	}
+	.to_share_file > span:nth-child(3) { /*온오프 표시 동그라미*/
+		font-size: 15px;
+		font-weight: 400;
+		position: absolute;
+		left: 89px;
+		top: 5px;
+	}
+	.to_share_file > span:nth-child(3) > svg {
+		width: 20px;
+		height: 20px;
+	}
+	.to_share_file > span:nth-child(3) > svg > path {
+		fill: rgb(32, 162, 113);
+	}
+	.to_share_file > span:last-child { /*김민재*/
+		position: absolute;
+		left: 112px;
+		top: 2px;
+	}
+	 .second_child p { /*에디터를 쓰면 자동으로 <p>태그로 가져오기 때문에 css로 없애줌*/
+	    margin: 0;
+	}
+	#loadingOverlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: rgba(0, 0, 0, 0.5) !important;
+            z-index: 999999 !important; /* 숫자는 무조건 크게 */
+            display: none; 
+        }
+        #loadingOverlay.visible {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }        
+        .loading-box {
+            background: white !important;
+            width: 200px !important; 
+            padding: 25px !important;
+            border-radius: 12px !important;
+            text-align: center !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+        }
+        .loading-box-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+	

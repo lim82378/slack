@@ -1,0 +1,2765 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { 
+	width: 100vw; /*1920*/
+	height: 100vh; /*920*/
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+	overflow: hidden;
+}
+/*에디터 전송 버튼 css*/
+#editor_dtn {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+    right: 10px;
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    background-color: transparent;
+    top: 69px;
+    cursor: pointer;
+    border: 0;
+}
+#editor_dtn > svg {
+	width: 20px;
+    height: 20px;
+}
+.channel_content_chat p {
+    margin: 0 !important;
+    padding: 2px 0 !important;
+}
+.message_content {
+    line-height: 1.4;
+    word-wrap: break-word; /* 긴 영문 텍스트 깨짐 방지 */
+}
+
+/* 이미지가 너무 크게 나올 경우 대비 */
+.message_content img {
+    max-width: 300px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+#header {
+	background-color: rgb(60, 10, 61);
+	width: 100%;
+	height: 40px;
+}
+#sidebar {
+	background-color: rgb(60, 10, 61);
+	width: 80px;
+	height: calc(100vh - 40px);
+	padding-top: 68px;
+}
+#sidebar > div { cursor: pointer; }
+#sidebar > div:NOT(:first-child) {
+	margin-left: 16px;
+	margin-bottom: 16px;
+	width: 38px;
+	height: 52px;
+	color: white;
+}
+#sidebar > div:NOT(:first-child):hover > div:first-child > svg {
+	width: 25px;
+	height: 25px;
+}
+#sidebar > div:NOT(:first-child) > div:first-child { /*홈 아이콘_div*/
+	width: 36px;
+	height: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#sidebar > div.on:NOT(:first-child) > div:first-child {
+	background-color: rgb(95, 53, 97);
+	border-radius: 8px;
+}
+#sidebar > div:NOT(:first-child) > div:first-child > svg { /*홈 아이콘_svg*/
+	width: 20px;
+	height: 20px;
+	transition: all 0.3s ease-in-out;
+}
+#sidebar > div:NOT(:first-child) > div:last-child { /*홈*/
+	font-size: 11px;
+	line-height: 12px;
+	font-weight: 700;
+	text-align: center;
+	/*letter-spacing: -0.3px;*/
+	margin-top: 4px;
+}
+#sidebar > div:first-child { 
+	position: absolute;
+	top:47px;
+	width: 36px; 
+	height: 36px; 
+	margin-left: 16px;
+	border-radius: 10px;
+	background-color: rgb(133, 118, 135);
+	color: rgb(39, 24, 44);
+	font-size: 20px;
+	line-height: 36px;
+	font-weight: 600;
+	text-align: center;
+}
+#side_menu {
+	margin-left: -10px;
+	width: 328px;
+	height: calc(100vh - 40px);
+	background-color: rgb(85, 38, 87);
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+#side_menu > div:nth-child(1) { 
+	height: 49px;
+}
+#side_menu > div:nth-child(1) > span {
+	font-size: 18px;
+	line-height: 49px;
+	font-weight: 900;
+	color: white; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin-left: 20px;
+}
+.side_menu_item {
+	position: relative;
+	width: 321px; /*변경전 328px*/
+	left: 8px;
+	height: 28px;
+	color: rgba(249, 237, 255, 0.8);
+	border-radius: 6px;
+	cursor: pointer;
+}
+.side_menu_item.on {
+	color: rgb(57, 6, 58);
+	background-color: rgb(249, 237, 255);
+}
+.side_menu_item:hover:NOT(.on) {
+	background-color: rgba(249, 237, 255, 0.08);
+	
+}
+.side_menu_item > svg { /*디렉터리 아이콘*/
+	position: absolute;
+	left: 10px;
+	top: 5px;
+	width: 20px;
+	height: 20px;
+}
+.side_menu_item > img {
+	position: absolute;
+    top: 4px;
+    left: 10px;
+    width: 20px;
+}
+.side_menu_item.channel { margin-top: 12px; }
+.side_menu_item.channel > svg { /* 채널 아이콘*/
+	transform: rotate(90deg) translateY(0);
+}
+.side_menu_item > span { /*디렉터리*/
+	margin-left: 36px;
+	line-height: 28px;
+}
+.separator {
+	height: 1px;
+	margin: 12px 10px;
+	border-bottom: 1px solid rgba(232, 232, 232, 0.13);
+}
+#header { 
+	display: flex; 
+	align-items: center;
+	/* justify-content: center; */ 
+}
+#header > div { 
+	width: 674px; 
+	height: 28px; 
+	background-color: rgb(115, 70, 119); 
+	border-radius: 4px; 
+	margin-left: 398px;
+	color: white;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+#header > div > svg {
+	margin-left: 9px;
+	margin-right: 7px;
+	opacity: 0.6;
+	width: 15px;
+	height: 15px;
+}
+#header > div > span {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+}
+#main_content {
+	width: calc(100vw - 70px - 328px);
+	height: calc(100vh - 40px);
+}
+#main_content > h1 {
+	height: 52px;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 49px;
+	margin: 0;
+	padding-left: 36px;
+	box-shadow: inset 0 -1px 0 0 #5e5d6021;
+}
+#main_content > div:nth-child(2) {
+	background-color: rgb(247, 247, 247);
+	height: calc(100vh - 40px - 52px);
+}
+#div_directory_search {
+	display: flex;
+	height: 52px;
+	padding: 15px 16px 16px 36px;
+}
+#div_directory_search > div {
+	position: relative;
+	min-width: 400px;
+	height: 36px;
+	border: 1px solid #5e5d6021;
+	border-radius: 8px;
+	background-color: rgb(254, 254, 254);
+}
+#div_directory_search > div:HAS(input:focus) {
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+}
+#div_directory_search > div > svg {
+	position: absolute;
+	top: 7px;
+	left: 11px;
+	width: 20px;
+	height: 20px;
+	color: rgb(97, 96, 97);
+}
+#div_directory_search > div > input[type="text"] {
+	margin-left: 45px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	width: 800px;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 30px;
+}
+#div_directory_search > div > input[type="text"]::placeholder {
+	color: rgb(112, 112, 112);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;		
+}
+#div_directory_search > div > span { /* x */
+	position: absolute;
+	top: 7px;
+	right: 11px;
+	color: rgb(112, 112, 112);
+	line-height: 21px;
+	cursor: pointer;
+}
+#div_directory_search > span {
+	width: 98px;
+	height: 36px;
+	padding: 6px 11px;
+	font-size: 15px;
+	background-color: white;
+	color: #1d1c1d;
+	border: 1px solid #5e5d6973;
+	font-weight: 700;
+	border-radius: 8px;
+	margin-left: 22px;
+	cursor: pointer;		
+}
+#div_directory_search + div {
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 36px;
+}
+#open_popup_first_time {
+	position: relative;
+	margin-top: 15px;
+	color: #1d1c1d;
+	font-size: 13px;
+	font-weight: 700;
+	background-color: white;
+	border-radius: 4px;
+	border: 1px solid rgba(29, 29, 29, 0.3);
+	padding: 3px 21px 3px 11px;
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+#div_directory_search + div svg { /*v 자*/
+	position: absolute;
+	top: 5px;
+	right: 3px;
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+}
+#div_profile {
+	display: grid;
+    /* 화면 크기에 맞춰 200px 이상의 카드를 꽉 채움 */
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.profile {
+	width: 181px;
+	height: 265px;
+	border-radius: 8px;
+	margin-right: 10px;
+	box-shadow: 0 0 0 1px rgb(209, 209, 209);
+	cursor: pointer;
+}
+.profile img {
+	width: 181px;
+	height: 181px;
+	border-top-left-radius: 4px;
+	border-top-left-radius: 4px;
+	object-fit: cover;
+}
+.profile span {
+	position: relative;
+	display: inline-block; 
+	width: 20px;
+	height: 20px;
+	top: 5px;
+	left: -3px;
+}
+.profile svg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgb(32, 161, 113);
+	width: 9px;
+	height: 9px;
+	border: none;
+	border-radius: 50%;
+}
+.profile > div {
+	margin-top: 5px;
+	margin-left: 18px;
+	font-size: 15px;
+	font-weight: 600;
+	color: rgb(29, 28, 29);
+}
+.profile svg path {
+	fill: rgb(32, 161, 113); /*svg에 색을 채운다*/
+}
+#black_filter { /* 팝업 활성화 시*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 10;
+}
+#black_filter_deep {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 22;
+}
+#clear_filter {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+	z-index: 10;
+}
+#popup_invite { /* 사용자 초대 팝업 */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 650px;
+    height: 230px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.popup_invite_div {
+	position: relative;
+}
+.popup_invite_header {
+	position: absolute;
+	width: 650px;
+	height: 70px;
+}
+.popup_invite_header > div {
+	position: absolute;
+	font-size: 22px;
+	font-weight: 600;
+	top: 15px;
+   	left: 25px;
+}
+.popup_invite_header > button { 
+	position: absolute;
+	width: 36px;
+   	height: 36px;
+   	margin-top: 19px;
+   	margin-left: 590px;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0;
+}
+.popup_invite_header > button.on {
+	background-color: white;
+}
+.popup_invite_header > button:hover:NOT(.on) {
+   	background-color: red; /*수정해야됨*/
+   	opacity: 0.6;
+	border-radius: 8px;
+}
+.popup_invite_header > button > svg {
+	width: 20px;
+	height: 20px;
+	color: #454447;
+}
+.popup_invite_content {
+	position: absolute;
+	width: 650px;
+	height: 80px;
+	top: 70px;
+   	padding: 0 28px;
+}
+.popup_invite_content > div:first-child {
+	position: absolute;
+	padding-bottom: 8px;
+	display:block;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+}
+.popup_invite_content > div:nth-child(2) {
+	position: absolute;
+	top: 28px;
+	width: 594px;
+	height: 40px;
+	border: 1px solid #5e5d6073;
+	border-radius: 12px;
+}
+.popup_invite_content > div:nth-child(2):HAS(input:focus) {
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+}
+.popup_invite_content > div:nth-child(2) > input[type="text"] {
+	position: absolute;
+	width: 100%;
+	border: none;
+   	outline: none;
+	padding: 0 12px;
+	font-size: 18px;
+	font-weight: 400;
+	top: 8px;
+	cursor: text
+}
+.popup_invite_content > div:nth-child(2) > input[type="text"]::placeholder {
+	color: rgb(112, 112, 112);
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+.popup_invite_footer {
+	position: absolute;
+	top: 160px;
+	width: 650px;
+	height: 84px;
+	padding: 0 28px 24px;
+}
+.popup_invite_footer > div:nth-child(1) {
+	color: red;
+	font-size: 15px;
+	font-weight: 400;
+}
+.popup_invite_footer > div:nth-child(2) {
+	width: 200px;
+	height: 20px;
+	color: rgb(18, 100, 163);
+	font-size: 15px;
+	font-weight: 400;
+	cursor: pointer;
+	top: -2px;
+}
+.popup_invite_footer > div:nth-child(2) > img {
+	cursor: pointer;
+	width: 15px;
+	height: 15px;
+}
+.popup_invite_footer > button {
+	width: 80px;
+	height: 36px;
+	position: absolute;
+	left: 535px;
+	bottom: 40px;
+	border: none;
+	border-radius: 12px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+#directory_popup_sort_div { /*정렬 팝업*/
+	position: absolute;
+	//top: 31%;
+	//left: 88%;
+	//transform: translate(-50%, -50%);
+	background-color: white;
+    width: 280px;
+    height: 112px;
+   	border-radius: 8px;
+   	border: 1px solid rgb(29, 28, 29);
+   	padding: 8px 0;
+   	z-index: 12;
+   	cursor: pointer;
+}
+.directory_popup_sort {
+	font-size: 15px;
+	font-weight: 700;
+	width: 278px;
+	height: 32px;
+	padding-left: 24px;
+}
+.directory_popup_sort.on_hover:NOT(:hover) {
+	position: relative;
+	background-color: rgb(255, 255, 255);
+	color: rgb(18, 100, 163);
+}
+.directory_popup_sort.on_hover:NOT(:hover)::BEFORE {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 6px;
+	width: 18px;
+	height: 18px;
+	background-image: url("../img/ico_check_bgwhite_18x18.png");
+	background-size: cover;
+	background-position: center;
+}
+.directory_popup_sort:hover {
+	position: relative;
+	background-color: rgb(18, 100, 163);
+	color: rgb(255, 255, 255);
+ 	/* background-color: rgb(255, 255, 255); */
+}
+.directory_popup_sort.on_hover:hover::BEFORE {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 6px;
+	width: 18px;
+	height: 18px;
+	background-image: url("../img/ico_check_bgblue_18x18.png");
+	background-size: cover;
+	background-position: center;
+}
+#popup_member_search_div{ /* 멤버 검색 팝업 */
+	position: absolute;
+	top: 200px;
+	left: 858px;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 874px;
+    height: 116px;
+   	border-radius: 8px;
+   	border: 0.5px solid #5e5d6021;
+   	box-shadow: 0 2px 2px 0 #00000059;
+}
+.popup_member_search {
+	position: relative;
+	width: 850px; 
+	height: 40px;
+	margin: 12px;
+	cursor: pointer;
+}
+.popup_member_search.on:hover {
+	background-color: rgb(18, 100, 163);
+	color: rgb(255, 255, 255);
+}
+.popup_member_search > img {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 5px;
+	left: 5px;
+	border-radius: 8px;
+}
+.popup_member_search > svg {
+	position: absolute;
+	width: 18px;
+    height: 18px;
+    top: 17px;
+    left: 20px;
+	border-radius: 100%;
+}
+.popup_member_search > svg > path {
+	position: absolute;
+	color: rgb(97, 96, 97);
+}
+.popup_member_search > Strong {
+	position: absolute;
+	width: 30px; 
+	height: 24px;
+	top: 8px;
+	left: 40px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(29, 28, 29);
+}
+.popup_member_search > h1 {
+	position: absolute;
+	left: 70px;
+	top: 3px;
+	font-size: 12px;
+	font-weight: 400;
+	color: rgba(29, 28, 29, 0.8);
+}
+.popup_member_search > div > svg {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 8px;
+   	left: 820px;
+   	color: white;
+   	margin: 4px;
+}
+#popup_my_profile_div { /* 내 프로필 팝업 */
+	
+	position: absolute;
+	top: 52.2%;
+	right: -200px;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 400px;
+    height: calc(100vh - 40px);
+   	border-radius: 8px;
+   	z-index: 5;
+   	box-shadow: 0 4px #0000000d, 0 0 20px #0000001a;
+}
+.my_profile_header {
+	position: relative;
+	width: 377px;
+	height: 49px;
+	padding: 0 12px 0 16px;
+	background-color: rgb(255, 255, 255);
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	font-weight: 900;
+	left: 8px;
+}
+.my_profile_header > div {
+	position: absolute;
+	top: 10px;
+	left: 5px;
+}
+.my_profile_header > button {
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	background-color: white;
+	top: 10px;
+	right: -3px;
+}
+.my_profile_header > button:hover {
+	background-color: red;
+  		opacity: 0.6;
+}
+.my_profile_header > button > svg {
+	width: 18px;
+	height: 18px;
+	display: block;
+}
+.my_profile_content {
+	width: 100%;
+	height: calc(100vh - 40px - 49px);
+}
+.my_profile_content > div:nth-child(1) { /*프로필 사진 및 사진 업로드 버튼*/
+	position: relative;
+	flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 16px 0;
+    display: flex;
+    height: 288px;
+    border-radius: 8px;
+}
+.my_profile_content > div:nth-child(1) > img {
+   	position: relative;
+	width: 100%;
+   	top: 0;
+   	left: 0;
+   	border-radius: 8px;
+   	overflow: hidden;
+   	object-fit: cover;
+}
+.my_profile_content > div:nth-child(1) > button {
+	position: absolute;
+	min-width: 56px;
+	height: 28px;
+	padding: 0 12px 1px;
+	font-size: 13px;
+	font-weight: 700;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid #5e5d6073;
+	color: #1d1c1d;
+	border-radius: 8px;
+	cursor: pointer;
+	top: 32px;
+	right: 24px;
+}
+.my_profile_content > div:nth-child(1) > button:hover {
+	background-color: red;
+}
+.my_profile_content > div:nth-child(2) {
+	position: relative;
+	width: 100%;
+	height: 66px;
+	padding: 16px;
+}
+.my_profile_content > div:nth-child(2) > div {
+	position: absolute;
+	font-size: 22px;
+	font-weight: 900;
+	color: rgb(29, 28, 29);
+}
+.my_profile_content > div:nth-child(2) > button {
+	position: absolute;
+	top: 23px;
+   	right: 10px;
+	font-size: 15px;
+	font-weight: 700;
+	color: rgb(18, 100, 163);
+	cursor: pointer;
+	background-color: transparent; /*배경색 투명*/
+	border: 0;
+}
+.my_profile_content > div:nth-child(2) > button:hover {
+	color: rgb(11, 76, 140);
+   	text-decoration: underline;
+}
+.my_profile_content > div:nth-child(3) {
+	position: relative;
+	width: 100%;
+	height: 30px;
+	padding: 0 16px 0;
+}
+.my_profile_content > div:nth-child(3) > svg {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 2px;
+	color: rgb(32, 162, 113);
+}
+.my_profile_content > div:nth-child(3) > span { /*온라인 및 상태 설정*/
+	position: absolute;
+	padding-left: 8px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(29, 28, 29);
+}
+.on_off_line {
+	left: 32px;	
+}
+.on_status {
+	left: 80px;
+	max-width: 200px;
+    max-height: 30px;
+}
+.dtn_status_password {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	padding: 0 16px 0;
+}
+.dtn_status_password > button {
+	position: absolute;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	border-radius: 8px;
+	background-color: transparent;
+	padding: 0 36px 0;
+}
+.dtn_status_password > button:hover {
+	background-color: red;
+}
+.dtn_status_password > button:nth-child(1) {
+	left: 36px;
+	cursor: pointer;
+}
+.dtn_status_password > button:nth-child(2) {
+	right: 41px;
+	cursor: pointer;
+}
+#users_profile_status_area {
+	padding-left: 20px;
+}
+.profile_separator {
+	height: 1px;
+	margin: 12px 10px;
+	border-bottom: 1px solid rgba(29, 28, 29, 0.13);
+}
+.my_profile_footer {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	padding: 0 16px 0;
+}
+.my_profile_footer > span {
+	position: absolute;
+}
+.my_profile_footer > img {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	margin-right: 16px;
+	top: 36px;
+}
+.my_profile_footer > span:nth-child(1) {
+	font-size: 15px;
+	font-weight: 900;
+}
+.my_profile_footer > span:nth-child(3) {
+    top: 36px;
+   	left: 65px;
+	font-size: 13px;
+	font-weight: 700;
+}
+.my_profile_footer > span:nth-child(4) {
+	top: 53px;
+   	left: 65px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(18, 100, 163);
+	cursor: pointer;
+}	
+.my_profile_footer > span:nth-child(4):hover {
+	color: rgb(11, 76, 140);
+   	text-decoration: underline;
+}
+.popup_member_profile_div { /* 멤버 프로필 팝업 */
+	position: absolute;
+	top: 52.2%;
+	right: -200px;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 400px;
+    height: calc(100vh - 40px);
+   	border-radius: 8px;
+   	z-index: 5;
+   	box-shadow: 0 4px #0000000d, 0 0 20px #0000001a;
+}
+.member_profile_header {
+	position: relative;
+	width: 377px;
+	height: 49px;
+	padding: 0 12px 0 16px;
+	background-color: rgb(255, 255, 255);
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	font-weight: 900;
+	left: 8px;
+}
+.member_profile_header > div {
+	position: absolute;
+	top: 10px;
+	left: 5px;
+}
+.member_profile_header > button {
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	background-color: white;
+	top: 10px;
+	right: -3px;
+}
+.member_profile_header > button:hover {
+	background-color: red;
+  		opacity: 0.6;
+}
+.member_profile_header > button > svg {
+	width: 18px;
+	height: 18px;
+	display: block;
+}
+.member_profile_content {
+	width: 100%;
+	height: calc(100vh - 40px - 49px);
+}
+.member_profile_content > div:nth-child(1) { /*프로필 사진 및 사진 업로드 버튼*/
+	position: relative;
+	flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 16px 0;
+    display: flex;
+    height: 288px;
+    border-radius: 8px;
+}
+.member_profile_content > div:nth-child(1) > img {
+   	position: relative;
+	width: 100%;
+	max-height: 290px;
+   	top: 0;
+   	left: 0;
+   	border-radius: 8px;
+}
+.member_profile_content > div:nth-child(2) {
+	position: relative;
+	width: 100%;
+	height: 66px;
+	padding: 16px;
+}
+.member_profile_content > div:nth-child(2) > div {
+	position: absolute;
+	font-size: 22px;
+	font-weight: 900;
+	color: rgb(29, 28, 29);
+}
+.member_profile_content > div:nth-child(3) {
+	position: relative;
+	width: 100%;
+	height: 30px;
+	padding: 0 16px 0;
+}
+.member_profile_content > div:nth-child(3) > svg {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 2px;
+}
+.member_profile_content > div:nth-child(3) > span {
+	left: 32px;
+	position: absolute;
+	padding-left: 8px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(29, 28, 29);
+}
+.member_profile_content > div:nth-child(3) > button {
+	position: absolute;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	border-radius: 8px;
+	background-color: transparent;
+	padding: 0 36px 0;
+	right: 20px;
+	top: -6px;
+	cursor: pointer;
+}
+.member_profile_content > div:nth-child(3) > button:hover {
+	background-color: red;
+}
+.profile_separator {
+	height: 1px;
+	margin: 12px 10px;
+	border-bottom: 1px solid rgba(29, 28, 29, 0.13);
+}
+.member_profile_footer {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	padding: 0 16px 0;
+}
+.member_profile_footer > span {
+	position: absolute;
+}
+.member_profile_footer > img {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	margin-right: 16px;
+	top: 36px;
+}
+.member_profile_footer > span:nth-child(1) {
+	font-size: 15px;
+	font-weight: 900;
+}
+.member_profile_footer > span:nth-child(3) {
+    top: 36px;
+   	left: 65px;
+	font-size: 13px;
+	font-weight: 700;
+}
+.member_profile_footer > span:nth-child(4) {
+	top: 53px;
+   	left: 65px;
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(18, 100, 163);
+	cursor: pointer;
+}	
+.member_profile_footer > span:nth-child(4):hover {
+	color: rgb(11, 76, 140);
+   	text-decoration: underline;
+}
+#popup_profile_status_update_div { /*내 상태 설정 팝업*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 520px;
+    height: 360px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.profile_status_update_header {
+	position: relative;
+	width: 520px;
+	height: 70px;
+	padding: 20px 28px 10px 28px;
+}
+.profile_status_update_header > div {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 900;
+}
+.profile_status_update_header > button {
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;
+}
+.profile_status_update_header > button:hover {
+	background-color: red;
+  	opacity: 0.6;
+}
+.profile_status_update_content {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	padding: 14px 36px 0 36px;
+}
+.profile_status_update_content > div:first-child {
+	color: rgba(29, 28, 29, 0.7);
+	font-size: 13px;
+	font-weight: 700;
+	padding-bottom: 5px;
+}
+.status_update_div {
+	/*아래로 옮기기 용*/
+}
+.status_update {
+	position: relative;
+	align-items: center;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 400;
+	width: 448px;
+	height: 28px;
+	cursor: pointer;
+}
+.status_update:not(.no-hover):hover {
+    background-color: rgb(18, 100, 163);
+	color: rgb(255, 255, 255);
+}
+.status_update > img {
+	position: absolute;
+	width: 22px;
+	height: 22px;
+	top: 1px;
+}
+#popup_profile_status_update_div .status_update > div {
+	position: absolute;
+	top: 1px;
+	left: 30px;
+}
+.profile_status_update_footer {
+	position: relative;
+	width: 520px; 
+	height: 84px;
+	padding: 24px 28px;
+}
+.profile_status_update_footer > button {
+	position: absolute;
+	width: 80px;
+	height: 36px;
+	border-radius: 8px;
+	border: 1px solid #5e5d6073;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+}
+.profile_status_update_footer > button:nth-child(1) {
+	background-color: white;
+	color: rgb(29, 28, 29);
+	right: 45px; /*120px*/
+}
+/* .profile_status_update_footer > button:nth-child(2) {
+	background-color: rgb(0, 122, 90);
+	color: white;
+	right: 25px;
+} */
+#edit_my_profile_div { /* 내 프로필 편집 */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 700px;
+    height: 480px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.edit_my_profile_header {
+	position: relative;
+	width: 700px;
+	height: 70px;
+	padding: 20px 26px 20px 28px;
+}
+.edit_my_profile_header > div {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 900;
+}
+.edit_my_profile_header > button {
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;
+}
+.edit_my_profile_header > button:hover {
+	background-color: red;
+  	opacity: 0.6;
+}
+.edit_my_profile_content_div {
+	position: relative;
+	width: 100%;
+	height: 326px;
+	padding: 0 28px;
+}
+.edit_my_profile_content_div > div:nth-child(1) {
+	position: relative;
+	width: 420px;
+	height: 326px;
+}
+.edit_my_profile_content_div > div:nth-child(2) {
+	position: relative;
+	width: 192px;
+	height: 326px;
+}
+.edit_my_profile_content {
+	width: 100%;
+	height: 100%;
+}
+.edit_my_profile_content > span { /*성명*/
+	width: 420px;
+	height: 30px;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+	padding-bottom: 8px;
+}
+.edit_my_profile_content > div > div { /*인풋텍스트*/
+	width: 420px;
+	height: 44px;
+	margin: 5px 0 20px 0;
+}
+.edit_my_profile_content > div > div:HAS(input:focus){
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	border-radius: 12px;
+}
+.edit_my_profile_content > div > div > input[type="text"] {
+	width: 420px;
+	height: 44px;
+	padding: 12px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+	border-radius: 12px;
+	border: 1px solid #5e5d6073;
+}
+.edit_my_profile_content > div > div > input[type="text"]::placeholder {
+	color: rgb(112, 112, 112);
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.edit_my_profile_content > img {
+	border-radius: 4px;
+	width: 192px;
+	height: 192px;
+	overflow: hidden;
+}
+.edit_my_profile_content > div {
+	margin: 5px;
+}
+.edit_my_profile_content > div > button {
+	border-radius: 8px;
+	width: 192px;
+	height: 36px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	background-color: transparent;
+	border: 1px solid #5e5d6073;
+	cursor: pointer;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.edit_my_profile_content > div > button:hover{
+	background-color: red;
+}
+.edit_my_profile_footer {
+	position: relative;
+}
+.edit_my_profile_footer > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+
+.edit_my_profile_footer > button:nth-child(1) {
+	position: absolute;
+	right: 150px;
+	width: 80px;
+	background-color: white;
+	color: rgb(29, 28, 29);
+	top: 10px;
+}
+.edit_my_profile_footer > button:nth-child(2) {
+	position: absolute;
+	right: 20px;
+	width: 114px;
+	background-color: rgb(0, 122, 90);
+	color: white;
+	top: 10px;
+}
+#edit_my_profile_picture_div { /*프로필 사진 추가*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 520px;
+    height: 744px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.edit_my_profile_picture_header {
+	position: relative;
+	width: 520px;
+	height: 70px;
+}
+.edit_my_profile_picture_header > div {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	padding: 20px 76px 20px 28px;
+}
+.edit_my_profile_picture_header > button {
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;
+}
+.edit_my_profile_picture_header > button:hover {
+	background-color: red;
+  	opacity: 0.6;
+}
+.edit_my_profile_picture_content {
+	width: 100%;
+	height: 590px;
+	padding: 0 28px;
+}
+.file_upload_div {
+	width: 460px;
+	height: 460px;
+	border: 4px dashed rgb(221, 221, 211);
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.file_upload_div > div > img {
+	width: 150px;
+	height: 175px;
+}
+.file_upload_div > div > h3 {
+	font-size: 18px;
+	line-height: 1.3;
+	font-weight: 700;
+	margin: 0 13px 18px;
+}
+.file_upload_div > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	height: 36px;
+	font-size: 15px;
+	font-weight: 700;
+	width: 110px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+	background-color: white;
+}
+.file_upload_div > button:hover{
+	background-color: red;
+}
+.file_preview {
+	width: 100%;
+	height: 106px;
+	margin-top: 24px;
+}
+.file_preview > div {
+	position: relative;
+	font-size: 13px;
+	line-height: 1.3;
+	font-weight: 400;
+	color: rgba(29, 28, 29, 0.7);
+	margin-bottom: 16px;
+}
+.file_preview > div > img {
+	width: 72px;
+	height: 72px;
+	border-radius: 12px;
+	overflow: hidden;
+}
+.file_preview > div > div {
+	position: absolute;
+	top: 10px;
+    left: 95px;
+	width: 384px;
+	height: 84px;
+	margin: -12px -8px -16px -16px;
+}
+.file_preview > div > div > span:nth-child(1) {
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 22px;
+	margin-right: 3px;
+}
+.file_preview > div > div > span:nth-child(2) {
+	color: rgb(97, 96, 97);
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 17px;
+}
+.edit_my_profile_picture_footer {
+	border-radius: 0 0 8px 8px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 84px;
+    margin-top: auto;
+    padding: 24px 28px;
+    display: flex;
+}
+.edit_my_profile_picture_footer > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	width: 80px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+.edit_my_profile_picture_footer > button:nth-child(1) {
+	background-color: white;
+	color: rgb(29, 28, 29);
+	margin-right: 12px;
+}
+.edit_my_profile_picture_footer > button:nth-child(2) {
+	background-color: rgb(0, 122, 90);
+	color: white;
+}
+#AI_profile_img_div { /*AI 프로필 이미지 생성*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 500px;
+    height: 480px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.AI_profile_img_header {
+	position: relative;
+	width: 500px;
+	height: 70px;
+	padding: 20px 26px 20px 28px;
+}
+.AI_profile_img_header > div {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 900;
+}
+.AI_profile_img_header > button {
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;
+}
+.AI_profile_img_header > button:hover {
+	background-color: red;
+  	opacity: 0.6;
+}
+.AI_profile_img_content {
+	position: relative;
+	width: 100%;
+	height: 326px;
+	padding: 0 28px;
+}
+.AI_profile_img_content > span {
+	width: 420px;
+	height: 30px;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+}
+.input_AI_profile > div {
+	width: 420px;
+	height: 44px;
+	margin: 5px 0 5px 0;
+}
+.input_AI_profile > div:HAS(input:focus) {
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	border-radius: 12px;
+}
+.input_AI_profile > div > input[type="text"] {
+	width: 420px;
+	height: 44px;
+	padding: 12px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+	border-radius: 12px;
+	border: 1px solid #5e5d6073;
+}
+.input_AI_profile > div > input[type="text"]::placeholder {
+	color: rgb(112, 112, 112);
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.AI_img_tip {
+	width: 440px;
+	height: 18px;
+	color: rgb(94, 93, 96);
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+}
+.AI_profile_img_footer {
+	border-radius: 0 0 8px 8px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 84px;
+    margin-top: auto;
+    padding: 24px 28px;
+    display: flex;
+}
+.AI_profile_img_footer > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+.AI_profile_img_footer > button:nth-child(1) {
+	width: 80px;
+	background-color: white;
+	color: rgb(29, 28, 29);
+	margin-right: 12px;
+}
+.AI_profile_img_footer > button:nth-child(2) {
+	width: 200px;
+	background-color: rgb(0, 122, 90);
+	color: white;
+}
+#edit_password_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 500px;
+    height: 440px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.edit_password_header {
+	position: relative;
+	width: 500px;
+	height: 70px;
+	padding: 20px 26px 20px 28px;
+}
+.edit_password_header > div {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 900;
+}
+.edit_password_header > button {
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;
+}
+.edit_password_header > button:hover {
+	background-color: red;
+  	opacity: 0.6;
+}
+.edit_password_content {
+	position: relative;
+	width: 100%;
+	height: 275px;
+	padding: 0 28px;	
+}
+.edit_password_content > span {
+	width: 420px;
+	height: 30px;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+}
+.edit_password_content > span > span {
+	font-size: 15px;
+	font-weight: 700;
+	color: rgb(229, 135, 132);
+}
+.input_edit_password > div {
+	width: 420px;
+	height: 44px;
+	margin: 5px 0 5px 0;
+}
+.input_edit_password > div:HAS(input:focus) { /*비밀번호 틀릴시 빨간색으로 변경해야됨*/
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	border-radius: 12px;
+}
+.input_edit_password > div > input[type="password"] {
+	width: 420px;
+	height: 44px;
+	padding: 12px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+	border-radius: 12px;
+	border: 1px solid #5e5d6073;
+}
+.input_edit_password > div > input[type="password"]::placeholder {
+	color: rgb(112, 112, 112);
+	line-height: 22px;
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+.input_edit_password_tip {
+	width: 440px;
+	height: 18px;
+	color: red;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;	
+}
+.edit_password_foorter {
+	border-radius: 0 0 8px 8px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 84px;
+    margin-top: auto;
+    padding: 24px 28px;
+    display: flex;	
+}
+.edit_password_foorter > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+}
+.edit_password_foorter > button:nth-child(1) {
+	width: 80px;
+	background-color: white;
+	color: rgb(29, 28, 29);
+	margin-right: 12px;
+}
+.edit_password_foorter > button:nth-child(2) {
+	width: 200px;
+	background-color: rgb(0, 122, 90);
+	color: white;
+}
+.channel_content_div {
+	font-family: 'Noto Sans KR', sans-serif;
+	width: calc(100vw - 70px - 328px);
+	height: calc(100vh - 40px);
+}
+.channel_content_header {
+	width: 100%;
+	height: 49px;
+	align-items: center;
+	display: flex;
+	border-bottom: 1px solid rgba(29, 28, 29, 0.1);
+	justify-content: space-between;
+	margin-left: 10px;
+}
+.channel_content_header_text {
+	width: 800px;
+	height: 24px;
+	color: rgb(29, 28, 29);
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1px;
+	padding: 2px 4px;
+	
+}
+.channel_content_header_text > svg {
+	width: 18px;
+}
+.channel_content_header_text > span {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.channel_content_header_button {
+	display: flex;
+	flex: none;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+}
+.channel_content_header_button > button {
+	color: rgba(29, 28, 29, 0.7);
+	cursor: pointer;
+	height: 28px;
+	background-color: white;
+	padding: 3px 0 3px 3px;
+	position: relative;
+	right: 5px;
+}
+.channel_content_header_button > button:nth-child(1) {
+	border: 1px solid #5e5d6021;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+	min-width: 60px;
+}
+.channel_content_header_button > button:nth-child(1) > img {
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	top: 3px;
+    left: 7px;
+}
+.channel_content_header_button > button:nth-child(1) > span {
+	position: absolute;
+	top: 3px;
+    right: 2px;
+	padding: 0 6px 0 12px;
+}
+.channel_content_header_button > button:nth-child(2) {
+	width: 28px;
+	border: 0;
+}
+.channel_content_header_button > button:nth-child(2) svg{
+	width: 16px;
+	height: 16px;
+}
+.channel_content_message_time_line {
+	position: relative;
+	width: 100%;
+	height: 1px;
+	margin: 20px 0;
+	border-top: 1px solid rgba(29, 29, 29, 0.3);
+}
+.channel_message_div {
+	width: 100%;
+	height: 77%;
+	overflow: auto;
+}
+.time_line_btn {
+	position: absolute;
+	left: 50%;
+    top: -13px;
+    padding: 0 16px;
+    font-size: 13px;
+    line-height: 27px;
+    z-index: 2;
+    border-radius: 24px;
+    border: 1px solid rgba(29, 29, 29, 0.3);
+    background-color: white;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.channel_content_message {
+	padding: 8px 20px;
+	user-select: text;
+    overflow-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.46668;
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    width: 100%;
+    min-height: 52px;
+}
+.channel_content_message > img {
+	width: 36px;
+	height: 36px;
+	border-radius: 12px;
+	cursor: pointer;
+}
+.channel_content_name_time {
+	padding: 0 8px 8px 16px;
+}
+.send_member {
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 900;
+	line-height: 22px;
+}
+.send_time {
+	color: rgb(97,96, 97);
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 17px;
+}
+.channel_content_chat {
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+}
+.channel_content_footer {
+	width: 100%;
+	height: 142px;
+	position: relative;
+}
+.channel_content_footer > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+}
+#channel_creation_div { /* 채널 추가 팝업*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 520px;
+    height: 290px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.channel_creation_header {
+	position: relative;
+	width: 100%;
+	height: 70px;
+	padding: 20px 26px 20px 28px;
+}
+
+.channel_creation_content {
+	position: relative;
+	width: 100%;
+	height: 142px;
+	padding: 0 28px;	
+}
+.channel_creation_footer {
+	border-radius: 0 0 8px 8px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 84px;
+    margin-top: auto;
+    padding: 24px 28px;
+    display: flex;	
+}
+.channel_creation_footer > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	width: 80px;
+	height: 36px;
+	color: white;
+	font-family: 'Noto Sans KR', sans-serif;
+	border: none;
+	cursor: pointer;
+	background-color: rgb(0, 122, 90);
+}
+
+.channel_right_click_menu_div {
+	position: absolute;
+/* 	top: 50%;
+	left: 20%; */
+	/* transform: translate(-50%, -50%); */
+	background-color: white;
+    width: 200px;
+    height: 200px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.channel_right_click_menu_content {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #5e5d6021;
+	color: rgb(29, 28, 29);
+	font-size: 17px;
+	font-weight: 500;
+	padding: 10px 0 10px 20px;
+	cursor: pointer;
+}
+.channel_right_click_menu_content:hover {
+	background-color:  rgba(94, 93, 96, 0.1);
+}
+.channel_creation_member_invite_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 100%;
+    max-width: 520px;
+	z-index: 23;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+   	padding: 20px 28px;
+}
+.channel_creation_member_invite_header{
+	width: 95%;
+	height: 70px;
+	
+}
+.channel_creation_member_invite_header_set {
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
+	width: 430px;
+}
+.channel_creation_member_invite_header_set > svg {
+	width: 18px;
+	height: 18px;
+}
+.channel_name_header {
+	font-weight: 900;
+}
+
+.channel_creation_member_invite_content {
+	width: 100%;
+	min-height: 70px;
+}
+.channel_creation_member_invite_content_span {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+}
+.channel_members_invite_radio {
+	margin-right: 10px;
+}
+.channel_member_all_invite {
+	cursor: pointer;
+}
+.channel_member_name_invite {
+	cursor: pointer;
+}
+.channel_creation_member_invite_footer {
+	width: 100%;
+	padding-top: 10px;
+	direction: rtl;
+}
+.channel_creation_member_invite_footer > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	width: 80px;
+	height: 36px;
+	color: white;
+	font-family: 'Noto Sans KR', sans-serif;
+	border: none;
+	cursor: pointer;
+	background-color: rgb(0, 122, 90);
+}
+.show_channel_information_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 580px;
+    max-height: 590px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+   	font-size: 15px;
+   	font-weight: 400;
+   	flex-direction: column;
+    display: flex;
+}
+.show_channel_information_header {
+	align-items: center;
+    width: 100%;
+    min-height: 70px;
+    padding: 20px 28px;
+    display: flex;
+    font-size: 22px;
+    line-height: 1.36365;
+    font-weight: 900;
+}
+.channel_shop {
+	margin-right: 2px;
+	width: 22px;
+	height: 30px;
+}
+.channel_information_name {
+	height: 30px;
+	width: 100%;
+	font-weight: 700;
+}
+.channel_favorite_star {
+	min-width: 40px;
+	height: 28px;	
+    padding: 0 12px 1px;
+    border-radius: 6px;
+   	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	background-color: transparent;
+	border: 1px solid rgba(29, 28, 29, 0.3);
+    margin-left: 5px;
+}
+.channel_favorite_star > svg {
+	width: 15px;
+	height: 15px;	
+}
+.show_channel_information_menu {
+	padding-left: 20px;
+	width: 580px;
+	height: 30px;
+	font-size: 15px;
+	font-weight: 400;
+	border-bottom: 1px solid rgba(29, 28, 29, 0.1);
+}
+.show_channel_information_menu > button{
+	font-size: 13px;
+    line-height: 1.38463px;
+    font-weight: 800;
+    margin: 0 8px;
+    padding: 9px 0;
+    background-color: transparent;
+	cursor: pointer;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+.channel_member_soo {
+	color: rgba(29,28,29, 0.7);
+	font-weight: 700;
+}
+.show_channel_information_content {
+	width: 580px;
+	height: 413px;
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.channel_menu_button.on {
+	border-bottom: 2px solid rgb(128, 55, 135);
+	padding-bottom: 14px;
+}
+.channel_menu_button:NOT(.on) {
+	border-bottom: 0;
+}
+.manager_channel_name_set {
+	width: 90%;
+	height: 76px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 12px;
+	border: 1px solid #5e5d6073;
+	margin: 16px 28px;
+	padding: 12px 20px;	
+	cursor: pointer;
+}
+.manager_channel_name_set > div:nth-child(1) {
+	font-size: 15px;
+    line-height: 22px;
+    font-weight: 700;
+    position: relative;
+}
+.manager_channel_name_set:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.blue_edit {
+	position: absolute;
+	color: rgb(18, 100, 163);
+	cursor: pointer;
+	background-color: transparent; /*배경색 투명*/
+	border: 0;
+	font-size: 13px;
+	right: 1px;
+	font-weight: 700;
+}
+.blue_edit:hover {
+	color: rgb(11, 76, 140);
+   	text-decoration: underline;
+}
+.channel_name_shop {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+	color: rgba(29, 28, 29, 0.7);
+}
+.channel_name_shop > svg {
+	padding-top: 7px;
+	width: 15px;
+	height: 22px;
+}
+.main_content{
+	width: 90%;
+	height: 285px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 12px;
+	border: 1px solid #5e5d6073;
+	margin: 16px 28px;
+}
+.main_content_div {
+	width: 100%;
+	height: 76px;
+	font-size: 15px;
+    line-height: 22px;
+    font-weight: 700;
+    position:relative;
+	padding: 12px 20px;	
+	cursor: pointer;
+	border-bottom: 1px solid #5e5d6073;
+}
+.main_content_div > div {
+	position: relative;
+	width: 100%;
+	height: 22px;
+}
+.main_content_div:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.channel_leave {
+	width: 100%;
+	height: 55px;
+	font-size: 15px;
+    line-height: 22px;
+    font-weight: 700;
+	padding: 12px 20px;	
+	cursor: pointer;
+	color: red;
+}
+.channel_leave:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.show_channel_member_content {
+	width: 580px;
+	height: 413px;
+	background-color: rgb(255, 255, 255);
+	font-size: 15px;
+	font-weight: 400;
+	border-radius: 8px;
+}
+.channel_search_member_div {
+	padding: 16px 28px 16px;
+	width: 100%;
+	height: 68px;
+}
+.channel_search_member {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	border: 1px solid rgba(112, 112, 112, 0.5);
+	border-radius: 12px;
+	padding: 8px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+}
+.channel_search_member:HAS(input:focus) {
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+}
+.channel_search_member > svg {
+	position: absolute;
+	top: 10px;
+	width: 16px;
+	height: 16px;
+}
+.channel_search_member_input_text > input[type="text"]{
+	position: absolute;
+	top: 5px;
+    left: 26px;
+	width: 94%;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 24px;	
+}
+.channel_search_member_input_text > input[type="text"]::placeholder {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 24px;
+	color: rgb(112, 112, 112);
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+.channel_member_invite_button {
+	cursor: pointer;
+	width: 100%;
+	height: 60px;
+	padding: 12px 28px;
+	font-weight: 700;
+}
+.channel_member_invite_button:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.channel_member_invite_button > div {
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	font-weight: 700;
+	color: rgb(29, 28, 29);
+}
+.channel_member_invite_button > div > img {
+	border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+}
+.channel_member_uesrs {
+	cursor: pointer;
+	width: 100%;
+	height: 60px;
+	padding: 0 16px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+}
+.channel_member_uesrs:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.channel_member_uesrs > div {
+	padding: 12px;
+	display: flex;
+	align-items: center;
+}
+#channel_member_uesrs_div {
+	height: 265px;
+    overflow-y: auto;
+}
+.channel_member_uesrs > div > img {
+	border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+}
+.channel_member_uesrs_text_set {
+    display: contents;
+}
+.channel_member_uesrs_text_set > svg {
+	width: 20px;
+    height: 20px;
+    font-size: 20px;
+    display: block;
+    color: rgb(32, 162, 113);
+}
+.channel_member_uesrs_nickname {
+	font-weight: 700;
+}
+.channel_member_search_result {
+	width: 100%;
+	height: 286px;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+}
+.channel_member_search_users > span {
+	color: rgb(97, 67, 97);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 17px;
+	padding-left: 28px;
+}
+.channel_member_search_users > div {
+	display: flex;
+	align-items: center;
+	padding: 8px 28px;
+}
+.channel_member_search_users > div > img {
+	margin-right: 12px;
+}
+.channel_member_search_users > div > span {
+	color: rgba(29, 28, 29, 0.5);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 22px;
+}
+.channel_out_users_div {
+	border-top: 1px solid #5e5d6021;
+	background-color: rgba(29, 28, 29, 0.03);
+	height: 75%;
+}
+.channel_out_users_div > span {
+	color: rgb(97, 67, 97);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 17px;
+	padding-left: 28px;
+}
+.channel_out_users {
+	width: 100%;
+	height: 60px;
+	align-items: center;
+    display: flex;
+   	padding-left: 28px;
+   	position: relative;
+}
+.channel_out_users:hover {
+	background-color: rgba(29, 28, 29, 0.03);
+}
+.channel_out_users > img {
+	width: 36px;
+	height: 36px;
+	margin-right: 12px;
+}
+.channel_out_users > div {
+	min-width: 0;
+    max-width: 100%;
+}
+.channel_out_users > svg {
+	width: 20px;
+	height: 20px;
+}
+.channel_out_users > button {
+	position: absolute;
+	right: 16px;
+	background-color: rgb(255, 255, 255);
+	color: rgb(29, 28, 29);
+	border-radius: 8px;
+	padding: 0 12px 1px;
+    font-size: 13px;
+    font-weight: bold;
+    min-width: 80px;
+    height: 36px;
+    border: 1px solid #5e5d6073;
+   	cursor: pointer;
+}
+.channel_out_users > button:hover {
+	background-color: rgb(248, 248, 248);
+}
+.channel_not_search {
+	height: 118px;
+    margin: 0 auto;
+    padding-top: 32px;
+    max-width: 340px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: center;
+}
+.channel_not_search > div {
+	margin-bottom: 15px;
+}
+.channel_not_search > button {
+	background-color: rgb(255, 255, 255);
+	color: rgb(29, 28, 29);
+	border-radius: 8px;
+	padding: 0 12px 1px;
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 80px;
+    height: 36px;
+    border: 1px solid #5e5d6073;
+   	cursor: pointer;
+}
+.channel_not_search > button:hover {
+	background-color: rgb(248, 248, 248);
+}
+#AI_chat_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+    width: 500px;
+    height: 700px;
+	z-index: 20;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+}
+.AI_chat_header {
+	width: 100%;
+	height: 70px;
+	padding: 20px 26px 20px 28px;
+}
+#AI_chat_div > div:nth-child(2) {
+	width: 100%;
+	height: 40px;
+	padding: 10px 26px 5px 28px;
+	font-size: 18px;
+	font-weight: 700;
+	color: rgb(29, 28, 29);
+}
+#AI_chat_div > div:nth-child(3) {
+	width: 100%;
+	height: 30px;
+	padding: 0 26px 10px 28px;
+	font-size: 13px;
+	font-weight: 500;
+	color: rgba(29, 28, 29, 0.5);
+	border-bottom: 1px solid rgba(29, 28, 29, 0.1);
+	position:relative;
+}
+.AI_chat_channel_row {
+	position: absolute;
+	right: 60px;
+}
+.AI_chat_channel_row > img {
+	width: 15px;
+	height: 15px;
+}
+.AI_chat_channel_member {
+	position: absolute;
+	right: 30px;
+}
+.AI_chat_channel_member > img {
+	width: 15px;
+	height: 15px;
+}
+.AI_chat_content {
+	width: 480px;
+	height: 540px;
+	margin: 10px;
+	padding: 5px 30px;
+	overflow: auto;
+}
+.font_style {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 24px;
+}
+.AI_chat_content_name {
+	color: rgb(22, 103, 165);
+	background-color: rgb(232, 245, 250);
+}
+.this_channel_seting_edit_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	z-index: 23;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+	width: 520px;
+	height: 240px;
+}
+.this_channel_seting_edit_header {
+	width: 100%;
+	height: 63px;
+	padding: 20px 26px 20px 28px;
+}
+.this_channel_seting_edit_content {
+	width: 520px;
+	height: 96px;
+	padding: 0 28px;
+}
+.this_channel_seting_edit_foorter {
+	width: 100%;
+	padding-top: 25px;
+	direction: rtl;
+}
+.this_channel_seting_edit_foorter > button {
+	border-radius: 8px;
+	padding: 0 12px 1px;
+	font-size: 15px;
+	font-weight: 700;
+	height: 36px;
+	border: 1px solid #5e5d6073;
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	cursor: pointer;
+	margin-right: 12px;
+}
+.this_channel_seting_edit_foorter > button:nth-child(2) {
+	width: 80px;
+	background-color: white;
+	color: rgb(29, 28, 29);
+}
+.this_channel_seting_edit_foorter > button:nth-child(1) {
+	width: 145px;
+	background-color: rgb(0, 122, 90);
+	color: white;
+}
+.new_channel_div {
+	font-family: 'Noto Sans KR', sans-serif;
+	color: rgb(29, 28, 29);
+	line-height: 35px;
+	margin-left: 20px;
+}
+#new_channel_header_name_style {
+	font-size: 25px;
+	font-weight: 700;
+}
+#new_channel_tip_font {
+	font-size: 18px;
+	font-weight: 700;
+}
+.channel_content_list_area {
+	max-height: 80%;
+	overflow-y: auto;
+}
+/*기본 세팅 옵션*/
+.header_set {/* header 기본 세팅 */
+	color: rgb(29, 28, 29);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+}
+.header_button_set {/* header x 버튼 기본 세팅 */
+	color: rgb(69, 68, 71);
+	position: absolute;
+	border: 0;
+	border-radius: 8px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background-color: transparent;
+	top: 20px;
+	right: 20px;	
+}
+.header_button_set:hover { /*빨간 x 기본 세팅*/
+	background-color: red;
+  	opacity: 0.6;	
+}
+.content_main_span_set { /*content 메인 제목 기본 세팅*/
+	color: rgb(29, 28, 29);
+	font-size: 15px;
+	font-weight: 700;
+}
+.input_edit_blue_border > div {
+	margin-top: 10px;
+	width: 100%;
+	height: 44px;
+	border: 1px solid #5e5d6021;
+	border-radius: 12px;
+	background-color: rgb(254, 254, 254);
+	padding: 8px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+}
+.input_edit_blue_border > div:HAS(input:focus){
+	box-shadow: 0 0 0 1px #1262a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+}
+.input_edit_blue_border > div > input[type="text"] {
+	width: 100%;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: rgb(29, 28, 29);
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+}
+.input_edit_blue_border > div > input[type="text"]::placeholder {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+	color: rgb(112, 112, 112);
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+.channel_name {
+	font-weight: 700;
+}
+.content_tip {
+    color: rgb(94, 93, 96);
+    margin: 4px 0 20px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.38462;
+}
+.color_red {
+	color: red;
+}
+.button_hover_set_green:hover {
+	background-color: rgb(1, 114, 85);
+}
+.button_hover_set_gray:hover {
+	background-color:  rgba(94, 93, 96, 0.1);
+}
+.online_color {
+	color: rgb(32, 162, 113);
+	background-color: rgb(32, 162, 113);
+}
+.offline_color {
+	color: rgb(94, 93, 96);
+}
+.x_btn {
+	cursor: pointer;
+}
+.channel_create_search_popup {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgb(248,248,248);
+    width: 486px;
+    min-height: 56px;
+	z-index: 23;
+	box-shadow: 0 18px 48px 0 #00000059;
+   	border-radius: 8px;
+	padding: 12px 0 12px 0;
+}
+.users_search_div {
+	width: 486px;
+	height: 32px;
+	color: rgb(29,28,29);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 20px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+.users_search_div:hover {
+background-color: rgb(18, 100, 163);
+color: rgb(255, 255, 255);
+}
+.users_search_div > img {
+	border-radius: 6px;
+	margin-left: 15px;
+	width: 20px;
+	display: flex;
+} 
+.channel_invite_users {
+	margin-left: 10px;
+}
+ .header_search_history { 
+	width: 688px; 
+	min-height: 300px; 
+	border-radius: 6px; 
+	border: 1px solid lightgrey;
+	background-color: white; 
+	z-index: 50;
+	position: absolute;
+	left: 391px;
+	top: 5px;
+}
+.header_search_history > div:first-child { 
+	width: 688px; 
+	height: 45px; 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid lightgrey;
+}
+.header_search_history > div:first-child > div:first-child > svg:first-child {
+	width: 16px;
+	height: 16px;
+	margin-left: 21px;
+	color: rgb(97, 96, 97);
+	cursor: pointer;
+}
+.header_search_history > div:first-child > div:last-child > svg:last-child { /*X 버튼*/
+	width: 20px;
+	height: 20px;
+	color: rgb(97, 96, 97);
+	margin-right: 18px;
+	cursor: pointer;
+ }
+ .header_search_history > div > div:nth-child(2) {
+	width: 504px; 
+	height: 22px;
+	margin-bottom: 5px;
+ }
+ .header_search_history > div input[type='text'] {
+	width: 500px;
+	height: 22px;
+	border: none;
+	outline: none;
+	margin-left: -40px;
+	font-size: 15px;
+ }
+ .header_search_history > div input[type='text']::placeholder {
+	font-size: 15px;
+	font-weight: 400;
+ }
+ .header_search_history > div:nth-child(3) { /*최근검색*/
+	font-size: 13px;
+	color: rgb(97, 96, 97);
+	margin-left: 20px;
+	margin-top: 10px;
+	width: 688px; 
+	height: 45px;
+ }
+ .header_search_history_content {
+	width: 687px;
+	height:45px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+ }
+ .header_search_history_content:hover {
+	background-color: rgb(46, 99, 158);
+	color: white;
+ }
+ .header_search_history_content > div:first-child {
+	margin-left: 20px;
+ }
+ .header_search_history_content > div:first-child > svg {
+	width: 18px; 
+	height: 18px;
+ }
+ .header_search_history_content > div:nth-child(2) {
+	margin-left: -70px;
+	font-weight: 600;
+ }
+ .header_search_history_content > div:last-child {
+	margin-right: 16px;
+ }
+ .header_search_history_content > div:last-child {
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+ }
+ .header_search_history_content > div:last-child:hover {
+	background-color: rgb(84, 127, 176);
+ }
+ .header_search_history_content > div:last-child > svg { /*X버튼*/
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+ }
+.member_list_container {
+	height: 100%;
+    overflow-y: scroll; /* 스크롤 기능 활성화 */
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+ 	padding: 20px;
+    width: 100%;
+}
+.member_list_container::-webkit-scrollbar {
+    display: none;
+}
+.remove_member {
+		position: absolute;
+		background-color: rgb(248,248,248);
+		width: 130px;
+		height: 25px;
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 20px;
+		color: red;
+		z-index: 23;
+		box-shadow: 0 4px 4px 0 #00000059;
+	   	border-radius: 8px;    
+	   	padding: 2px 0 0 8px;
+	   	cursor: pointer;
+	}
+.ql-editor img {
+    max-width: 100%;   /* 에디터 가로폭에 딱 맞게 조절 */
+    height: 200px;
+    margin: 10px 0;    /* 위아래 간격 살짝 주기 */
+    border-radius: 5px; /* 모서리를 살짝 둥글게 (선택사항) */
+}
+.fl { float: left; }
+.fr { float: right; }
+.border { border: 1px solid yellow;}

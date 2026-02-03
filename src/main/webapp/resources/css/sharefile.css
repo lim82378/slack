@@ -1,0 +1,254 @@
+@charset "UTF-8";
+* { box-sizing: border-box; }
+		body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif;  }
+		.border { border: 1px solid black; }
+		.fl { float: left; }
+		#dm_black_filter { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 10;}
+		#dm_popup_share_file{
+			width: 520px;
+			height: 594px;
+			position: absolute; 
+			border-radius: 8px;
+			box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+			top: 50%; left: 50%; 
+			transform: translate(-50%, -50%);
+			/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+			background-color: white; 
+			z-index: 20;
+			
+		}
+		#dm_popup_share_file > div:nth-child(1) > div { /*파일공유*/
+			width: 520px;
+			height: 70px;
+			color: rgb(29, 28, 29);
+			font-size: 22px;
+			font-weight: 700;
+		    margin-left: 27px;
+    		margin-top: 30px;
+		}
+		#dm_popup_share_file > div:nth-child(2) { /*노란색 컨테이너*/
+			width: 464px;
+			height: 54px;
+			background-color: rgba(255, 198, 0, 0.18);
+			border-radius: 8px;
+			margin: -20px auto -20px;
+			padding: 4px 8px;
+		}
+		#dm_popup_share_file > div:nth-child(2) > span { /*노란색 컨테이너 안의 텍스트*/
+			width: 430px; 
+			height: 36px;
+			font-size: 13px;
+			font-weight: initial;
+		}
+		#dm_popup_share_file > div:nth-child(3) > div:last-child {
+			margin-bottom: 66px;
+		}
+		#dm_popup_share_file > div:nth-child(3) > div:last-child > img{ /*에디터 이미지*/
+			width: 464px;
+			height: 162px;
+			margin-left: 27px;
+			margin-bottom: -57px;
+		}
+		.dm_popup_input {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.dm_popup_input > div {
+			position: relative;
+			width: 464px;
+			height: 36px;
+			border: 1px solid rgba(94, 93, 96, 0.45);
+    		border-radius: 8px;
+    		margin-bottom: 16px;
+    		margin-top: 38px;
+		}
+		.dm_popup_input > div:HAS(input:focus) {
+			box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+		}
+		.dm_popup_input  > div > input[type='text']{
+			border: none;
+			outline: none;
+			background-color: transparent;
+			width: 500px;
+			font-size: 15px;
+			line-height: 28px;
+			font-weight: 400;
+			color: rgb(29, 28, 29);
+			cursor: pointer;
+		}
+		.dm_popup_input > div > input[type='text']::placeholder{
+			position: absolute;
+			top: 5px;
+			left: 14px;
+			color: rgb(112, 112, 112);
+			font-size: 15px;
+			font-weight: 400;
+			line-height: 22px;
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		#dm_popup_share_file > div:nth-child(4) { /*공유할 파일 미리보기 컨테이너*/
+			width: 464px;
+			height: 124px;
+			margin: 0 auto;
+		}
+		.dm_popup_small_image { /*미리보기 이미지랑 텍스트 담는 컨테이너*/
+			width: 464px;
+			height: 62px;
+			border: 1px solid rgba(29, 28, 29, 0.1);
+			border-radius: 12px;
+		}
+		.dm_popup_small_image > div:first-child > img { /*작은 미리보기 이미지*/
+			width: 36px;
+			height: 36px;
+			margin-left: 12px;
+			margin-top: 12px;
+		}
+		.dm_popup_small_image > div:last-child { /*스팬을 담고있는 컨테이너*/
+			position: relative;
+			width: 390px;
+			height: 36px;
+			margin-top: 7px;
+		}
+		.dm_popup_small_image > div:last-child > span:first-child { /*image.png*/
+			font-size: 15px;
+			font-weight: 500;
+			color: #1d1c1d;
+			margin-left: 11px;
+			border-radius: 8px;
+		}
+		.dm_popup_small_image > div:last-child > span:NOT(:first-child) {
+			color: #616061;
+			font-size: 13px;
+			font-weight: 300;
+		}
+		.dm_popup_small_image > div:last-child > span:nth-child(2) {
+			position: absolute;
+			top: 24px;
+    		left: 11px;
+		}
+		.dm_popup_small_image > div:last-child > span:nth-child(3) {
+			position: absolute;
+			top: 24px;
+    		left: 44px;
+		}
+		#dm_popup_share_file > div:nth-child(4) > div:nth-child(3) { 
+			position: relative;
+			width: 464px;
+			height: 46px;
+			background-color: rgba(29, 28, 29, 0.06);
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
+			margin: 17px auto 0;
+		}
+		#dm_popup_share_file > div:nth-child(4) > div:nth-child(3) > span { /*2명의 사용자가 엑세스*/
+			position: absolute;
+			top: 10px;
+			left: 14px;
+			font-size: 15px;
+			font-weight: 300;
+			line-height: 22px;
+		}
+ 		#dm_popup_share_file > div:last-child { 
+			width: 520px;
+			height: 84px;
+			padding: 14px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		#dm_popup_share_file > div:last-child > div { /*링크복사 컨테이너*/
+			position: relative;
+			margin-left: 32px;
+			margin-top: 8px;
+		}
+		#dm_popup_share_file > div:last-child > div:hover {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+		#dm_popup_share_file > div:last-child > div > span:first-child > svg { /*링크복사 아이콘*/
+			width: 15px;
+			height: 15px;
+			color: rgb(18, 100, 163);
+			position: absolute;
+			top: 7px;
+    		left: -19px;
+		}
+		#dm_popup_share_file > div:last-child > div > span:nth-child(2) {
+			color: rgb(18, 100, 163);
+			font-size: 15px;
+			font-weight: 300;
+		}
+		#dm_popup_share_file > div:last-child > button { /*전달 버튼*/
+			width: 80px;
+			height: 36px;
+			background-color: rgb(0, 122, 90);
+			color: white;
+			border-radius: 8px;
+			cursor: pointer; 
+			border: none;
+		    margin-right: 13px;
+		    margin-top: 15px;
+    		font-size: 15px;
+    		font-weight: 700;
+		}
+		.dm_popup_input+div { /*인풋 텍스트 클릭하면 뜨는 창*/
+			width: 486px;
+			height: 224px;
+			background-color: rgb(247, 247, 247);
+			border-radius: 6px;
+			box-shadow: rgba(29, 28, 29, 0.13) 0px 0px 0px 1px, rgba(0, 0, 0, 0.12) 0px 5px 10px 0px;
+			z-index: 20;
+			overflow: auto;
+			padding: 12px 0;
+			position: absolute;
+			top: 185px;
+			left: 16px;
+		}
+		.to_share_file { /*파일 공유하는 사용자 한 줄*/
+			width: 471px;
+			height: 32px;
+			background-color: rgb(248, 248, 248);
+			padding: 0 24px;
+			position: relative;
+			margin: 0 auto;
+			cursor: pointer;
+		}
+		.to_share_file:hover {
+			background-color: rgb(46, 99, 158);
+			color: white;
+		}
+		.to_share_file > span:first-child { /*프로필 이미지*/
+			position: absolute;
+			left: 28px;
+			top: 4px;
+		}
+		.to_share_file > span:first-child > img {
+			border-radius: 6px;
+		}
+		.to_share_file > span:nth-child(2) { /*민재*/
+			font-size: 15px;
+			font-weight: 700;
+			position: absolute;
+			left: 57px;
+			top: 3px;
+		}
+		.to_share_file > span:nth-child(3) { /*온오프 표시 동그라미*/
+			font-size: 15px;
+			font-weight: 400;
+			position: absolute;
+			left: 89px;
+			top: 5px;
+		}
+		.to_share_file > span:nth-child(3) > svg {
+			width: 20px;
+			height: 20px;
+		}
+		.to_share_file > span:nth-child(3) > svg > path {
+			fill: rgb(32, 162, 113);
+		}
+		.to_share_file > span:last-child { /*김민재*/
+			position: absolute;
+			left: 112px;
+			top: 2px;
+		}

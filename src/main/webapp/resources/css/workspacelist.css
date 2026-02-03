@@ -1,0 +1,171 @@
+@charset "UTF-8";
+* { box-sizing: border-box ;}
+		body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif; background-color: rgb(60, 10, 61);}
+		.fl { float: left; }
+		.fr { float: right; }
+		#workspace_list_header { 
+			width: 100vw;
+			height: 100px; 
+			position: relative;
+		}
+		#workspace_list_header > div > img {
+			position: absolute;
+		    top: 23px;
+		  	left: 97px;
+		}
+		#workspace_list_main {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 48px;
+			margin-bottom: 60px;
+		}
+		#workspace_list_main > div {
+			width: 1006px; 
+			height: 459px;
+		}
+		#workspace_list_main > div > div:nth-child(1) {
+			width: 1006px; 
+			height: 82px;
+			border-top-left-radius: 12px;
+			border-top-right-radius: 12px;
+			background-color: #f9f0ff;
+			position: relative;
+		}
+		#workspace_list_main > div > div:nth-child(1) > span {
+			position: absolute;
+		    top: 28px;
+    		left: 17px;
+			font-size: 18px;
+			font-weight: 400;
+		}
+		.workspace_name_list {
+			width: 1006px;
+			min-height: 105px;
+			background-color: white;
+			border-bottom-left-radius: 12px;
+			border-bottom-right-radius: 12px;
+		}.workspace_name {
+			border-bottom: 1px solid rgba(28, 29, 28, 0.1);
+			height: 105px;
+			cursor: pointer;
+		}
+		.workspace_name:hover {
+			background-color: #f8f8f8;
+		}
+		.workspace_name > div:first-child {
+			width: 1006px;
+		}
+		.workspace_name > div:first-child > div:first-child > img {
+			width: 75px;
+			height: 75px;
+			border-radius: 5px;
+			margin-top: 15px;
+    		margin-left: 15px;
+		}
+		.name_content {
+			position: relative;
+		}
+		.name_content > div:first-child {
+			font-size: 18px;
+			font-weight: 600;
+			margin-left: 16px;
+    		margin-top: 28px;
+		}
+		.name_content > div:nth-child(2) { /*작은 프로필 아이콘의 컨테이너*/
+			position: absolute;
+			left: 23px;
+    		top: 62px;
+			width: 30px;
+			height: 20px;
+		}
+		.name_content > div:nth-child(2) > img { /*작은 프로필 아이콘*/
+			width: 18px;
+			height: 18px;
+			border-radius: 3px;
+		}
+		.name_content > div:nth-child(3) { /*0명의 멤버*/
+			position: absolute;
+		    left: 53px;
+    		top: 62px;
+			color: #696969;
+			font-size: 14px;
+		}
+		.start_slack > button { /*슬랙실행하기 버튼*/
+			margin-right: 17px;
+    		margin-top: 25px;
+			width: 142px;
+			height: 53px;
+			padding: 16px;
+			background-color: rgb(97, 31, 105);
+			border-radius: 4px;
+			border: none;
+			cursor: pointer;
+		}
+		.start_slack > button:hover {
+			background-color: #4a154b;
+		}
+		.start_slack > button > span {
+			color: white;
+			font-size: 14px;
+			font-weight: 700;
+		}
+		#workspace_list_header2 { /*만나서 반가워요 컨테이너의 컨테이너*/
+			width: 1006px;
+			height: 68px;
+		}
+		#workspace_list_header2 > h1 { /*만나서 반가워요 컨테이너*/
+			display: flex;
+			justify-content: center;
+			width: 520px;
+			height: 68px;
+			margin: 0 194px;
+			padding-top: 32px;
+		}
+		#workspace_list_header2 > h1 > div {
+			margin-top: -5px;
+		}
+		#workspace_list_header2 > h1 > div > img {
+			width: 75px;
+			height: 68px;
+		}
+		#workspace_list_header2 > h1 > span { /*만나서 반가워요*/
+			font-size: 44px;
+			letter-spacing: -2px;
+			color: white;
+		}
+		.make_new_slack {
+			position: relative;
+			width: 1006px;
+			height: 89px;
+			margin: -13px auto 0;
+			background-color: white;
+			border-radius: 12px;
+		}
+		.make_new_slack > div > img {
+			width: 200px;
+			height:120.5px;
+		}
+		.make_new_slack > button {
+			position: absolute;
+		    right: 8px;
+		    top: 18px;
+			width: 151px;
+			height: 52px;
+			color: rgb(97, 31, 105);
+			background-color: white;
+			border: 1px solid rgb(97, 31, 105);
+			border-radius: 6px;
+			font-size: 14px;
+			font-weight: 700;
+			margin-right: 8px;
+			cursor: pointer;
+		}
+		.make_new_slack > span {
+			position: absolute;
+    		left: 220px;
+    		top: 33px;
+			color: rgb(0, 0, 0);
+			font-size: 16px;
+			font-weight: 700;
+		}

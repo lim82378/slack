@@ -1,0 +1,446 @@
+@charset "UTF-8";
+	* { box-sizing: border-box; }
+	.fl { float: left; }
+	.fr { float: right; }
+	.border { border: 1px solid yellow; }
+	body { margin: 0; width: 100vw; height: 100vh; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; overflow: hidden; }
+	#workspace_header {
+		width: 100vw;
+		height: 40px;
+		background-color: rgb(60, 10, 61);
+	}
+	#workspace_sidebar {
+		width: 80px;
+		height: calc(100vh - 40px);
+		background-color: rgb(60, 10, 61);
+	}
+	#workspace_sidebar_menu {
+		background-color: rgb(85, 38, 87);
+		width: 328px;
+		height: calc(100vh - 40px);
+		border-top-left-radius: 7px;
+		border-bottom-left-radius: 7px;
+		margin-left: -10px;
+	}
+	#workspace_content {
+		background-color: white;
+		width: calc(100vw - 70px - 328px);
+		height: calc(100vh - 40px);
+	}
+	#workspace_content > div {
+		margin-left: 65px;
+		margin-top: 65px;
+	}
+	#workspace_content > div:first-child > div:nth-child(1){ /* 1/3 단계 */
+		width: 577px;
+		height: 18px;
+		color: rgb(94, 93, 96);
+		font-size: 13px;
+		font-weight: 400px;
+		line-height: 18px;
+		margin-bottom: 16px;
+		letter-spacing: -1px;
+	}
+	#workspace_content > div:first-child > h2 {
+		width: 545px;
+		height: 105px;
+		font-size: 48px;
+		font-weight: 700px;
+		letter-spacing: -2px;	
+		line-height: 46px;
+		margin-bottom: 60px;
+		margin-top: 24px;
+		color: rgb(1d1c1d);
+		
+	}
+	#workspace_content span {
+		margin-bottom: 28px;
+		color: rgb(1d1c1d);
+	}
+	#workspace_name { /* input의 컨테이너 */
+		height: 52px;
+		padding: 15px 16px 16px 36px;
+		display: flex;
+		margin-left: -34px;
+		margin-bottom: 30px;
+	}
+	#workspace_name > div {
+		position: relative;
+		top: 14px;
+	    left: -3px;
+		width: 551px;
+		height: 36px;
+		border: 1px solid #5e5d6021;
+		border-radius: 8px;
+		background-color: rgb(254, 254, 254);
+	}
+	#workspace_name > div:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	#workspace_name > div > input[type='text']{
+		border: none;
+		outline: none;
+		background-color: transparent;
+		width: 500px;
+		font-size: 15px;
+		line-height: 28px;
+		font-weight: 400;
+		color: rgb(29, 28, 29);
+		margin-left: 4px;
+		margin-top: 2px;
+		cursor: pointer;
+		padding-left: 7px;
+	}
+	#workspace_name > div > input[type='text']::placeholder{
+		position: absolute;
+		left: 8px;
+		top: 3px;
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#workspace_name > div > input[type='text']:NOT(:focus)+span { /* 입력값이 있을 때 만 뜨는 최대 글자수*/
+		display: none;
+	} 
+	#workspace_content > div > div:last-child {
+		width: 556px;
+		height: 64px;
+		margin-top: 70px;
+	}
+	#workspace_content button {
+		background-color: rgb(60, 10, 61);
+		color: white;
+		font-weight: var(--custom-font-weight-bold, 700);
+	    border-radius: 8px;
+	    display: inline-flex;
+	    justify-content: center;
+	    align-items: center;
+	    box-shadow: none;
+	    width: 118px;
+	    height: 35px;
+ 	   	padding: 0 12px 1px;
+    	font-size: 15px;
+    	cursor: pointer;
+    	border: none;
+ 	}
+	#workspace_content_profile > div {
+		margin-left: 65px;
+		margin-top: 65px;
+	}
+	#workspace_content_profile > div > div:first-child { 
+		width: 577px;
+		height: 18px;
+		color: rgb(94, 93, 96);
+		font-size: 13px;
+		font-weight: 400px;
+		line-height: 18px;
+		margin-bottom: 16px;
+		letter-spacing: -1px;
+	}
+	#workspace_content_profile h2 { /*당신의 이름은 무엇인가요 ?*/
+		color: var(--dt_color-content-pry);
+	    letter-spacing: -.75px;
+	    max-width: 632px;
+	    margin-bottom: 8px;
+	    font-size: 48px;
+	    margin-top: -2px;
+	}
+	#workspace_content_profile > div > div:nth-child(3) {
+		color: var(--dt_color-content-pry);
+	    max-width: 632px;
+	    margin-bottom: 28px;
+	}
+	#workspace_user_name > div {
+		position: relative;
+		top: 1px;
+	    left: -3px;
+		width: 551px;
+		height: 36px;
+		border: 1px solid #5e5d6021;
+		border-radius: 8px;
+		background-color: rgb(254, 254, 254);
+		margin-bottom: 33px;
+	}
+	#workspace_user_name > div:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	#workspace_user_name input[type='text'] {
+		border: none;
+		outline: none;
+		background-color: transparent;
+		width: 500px;
+		font-size: 15px;
+		line-height: 28px;
+		font-weight: 400;
+		color: rgb(29, 28, 29);
+		margin-left: 4px;
+		margin-top: 2px;
+		cursor: pointer;
+		padding-left: 5px;
+	} 
+	#workspace_user_name input[type='text']::placeholder {
+		position: absolute;
+		left: 5px;
+		top: 4px;
+		color: rgb(112, 112, 112);
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 22px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#workspace_user_name input[type='text']:NOT(:focus)+span { /*input 오른쪽에 최대글자수 클릭했을 때만 */
+		display: none;
+	} 
+	#workspace_content_profile > div > span:nth-child(5) { /*내 프로필 사진*/
+		color: rgb(29, 28, 29);
+		font-size: 15px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		line-height: 22px;
+	}
+	#workspace_content_profile > div span:nth-child(6) { /*옵션*/
+		color: rgb(94, 93, 96);
+		font-size: 15px;
+		font-weight: 400;
+	}
+	.profile_section > div:first-child { /*팀원들이 적절한 사람과 ~*/
+		color: rgba(29, 28, 29, 1);
+		margin-top: 6px;
+		margin-bottom: 15px;
+	}
+	.profile_section > div:nth-child(2) > img { /*프로필 사진*/
+		width: 112px;
+		height: 112px;
+		margin-bottom: 16px;
+		margin-left: 5px;
+	}
+	.upload_profile_photo {
+		margin-bottom: 27px;
+		min-width: 122px;
+		height: 36px;
+		padding: 3px 12px 1px;
+		background-color: white;
+		outline: none;
+		border: 1px solid #5e5d6073;
+		border-radius: 8px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+	.upload_profile_photo > span { /*사진 업로드*/
+		color: #1d1c1d;
+		font-size: 15px;
+		font-weight: 700;
+	}
+	#workspace_content_profile > div > button:last-child {
+		min-width: 122px;
+		height: 36px;
+		background-color: rgb(74, 21, 75);
+		border-radius: 8px;
+		border: none;			
+	}
+	.button_next { cursor: pointer; }
+	.button_next > span {
+		color: white;
+		font-size: 15px;
+		font-weight: 700;
+	}
+	#workspace_black_filter { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 10;}
+	#popup_workspace_profile_upload{ /*팝업창*/
+		position: relative;
+		width: 520px;
+		height: 633px;
+		position: absolute; 
+		border-radius: 8px;
+		box-shadow: 0 0 0 1px var(--saf-0), 0 18px 48px 0 #00000059;
+		top: 50%; left: 50%; 
+		transform: translate(-50%, -50%);
+		/*트랜스폼이 뭐냐면 팝업창을 한 가운데에 두고 싶은데, 포지션 앱솔루트 해도 팝업창의 왼쪽 모서리를 기준으로 잡아서 화면 가운데에 놔주기 때문에 이걸로 기준점을 바꿔줘야 화면 가운데로 오게 할 수 있다*/ 
+		background-color: white; 
+		z-index: 20;
+	}
+	#popup_workspace_profile_upload > div:first-child {
+		width: 520px;
+		height: 70px;
+	}
+	#popup_workspace_profile_upload > div:first-child h2 {
+		width: 416px;
+		height: 30px;	
+		padding: 20px 76px 20px 28px;
+		display: flex;
+		align-items: center;
+	}
+	#popup_workspace_profile_upload > div:nth-child(2) { /* X 버튼 컨테이너 */
+		position: absolute;
+		top: 30px;
+		right: 15px;
+		width: 36px;
+		height: 36px;
+		border-radius: 8px;
+		color: #454447;
+	}
+	#popup_workspace_profile_upload > div:nth-child(2) > svg { /* X 버튼 svg*/
+		width: 20px;
+		height: 20px;	
+		cursor: pointer;
+	}
+	.img_file_upload > div:first-child { /*파일업로드 이미지의 컨테이너임*/
+		width: 464px;
+		height: 460px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin: -18px auto 16px;
+		border: 4px dashed rgb(221, 221, 221);
+	}
+	.img_file_upload > div:first-child > div {
+		width: 150px;
+		height: 199px;
+	}	
+	.img_file_upload img {
+		margin-top: -1px;
+		margin-left: -2px;
+	}
+	.img_file_upload h3 {
+		margin-top: 4px;
+		margin-left: 6px;
+		font-size: 18px;
+		font-weight: 900;
+	}
+	#file_upload_btn { /*파일업로드*/
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 80px;
+		height: 36px;
+		padding: 13px 11px 1px;
+		font-size: 15px;
+		font-weight: 700px;
+		border-radius: 8px;	
+		border: 1px solid rgba(94, 93, 96, 0.45);
+		cursor: pointer;
+		background-color: white;
+		margin-top: 14px;
+		margin-left: -8px;
+		color: rgb(29, 28, 29);
+		outline-color: rgb(29, 28, 29);
+		text-align: center;
+	}
+	#popup_workspace_profile_upload > div:last-child {
+		width: 520px;
+		height: 84px;
+		display: flex;
+		align-items: center;
+		border-top: 1px soild rgba(94, 93, 96, 0.45);
+	}
+	.workspace_cancle_save {
+		width: 464px;
+		height: 36px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.workspace_cancle_save > button:first-child { /*취소*/
+		width: 80px;
+		height: 36px;
+		padding: 0 12px 1px;
+		background-color: white;
+		border-radius: 8px;
+		border: 1px solid rgba(94, 93, 96, 0.45);
+		font-size: 16px;
+		cursor: pointer;
+	}
+	.workspace_cancle_save > button:last-child { /*저장*/
+		width: 80px;
+		height: 36px;
+		padding: 0 12px 1px;
+		border: none;
+		border-radius: 8px;
+		background-color: rgb(0, 122, 90);
+		color: white;
+		margin-left: 10px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+	#workspace_invite > div:first-child {
+		width: 705px;
+		height: 100%;
+		margin-left: 65px;
+		margin-top: 65px;
+		
+	}
+	#workspace_invite > div:first-child > div:first-child {
+		width: 577px;
+		height: 18px;
+		color: #5e5d60;
+		font-size: 13px;
+		font-weight: 400px;
+		line-height: 18px;
+		margin-bottom: 16px;
+		letter-spacing: -1px;
+	}
+	#workspace_invite > div > h2:nth-child(2) { /*팀에 누가 추가되어야하나요 ?*/
+		width: 545px;
+		height: 105px;
+		font-size: 48px;
+		font-weight: 700px;
+		letter-spacing: -3px;	
+		line-height: 46px;
+		margin-bottom: 13px;
+		margin-top: 20px;
+		color: rgb(1d1c1d);
+	}
+	#workspace_invite > div > div:nth-child(3){ /*이메일 직장 동료 추가*/
+		font-size: 13px;
+		font-weight: 700;
+    	line-height: 18px;
+    	
+	}
+	#workspace_invite > div > span {
+		color: rgb(29, 28, 29);
+		font-size: 15px;
+		font-weight: 400;
+	}
+	.workspace_input_email {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 577px;
+		height: 128px;
+		border: 1px solid #5e5d6021;
+		border-radius: 8px;
+		background-color: rgb(254, 254, 254);
+		margin-top: 14px;
+		margin-bottom: 14px;
+	}
+	.workspace_input_email:HAS(input:focus) {
+		box-shadow: 0 0 0 1px #1264a3, 0 0 0 5px color-mix(in srgb, #1264a3 30%, transparent);
+	}
+	.workspace_input_email > input[type='text']{
+		width: 555px;
+		height: 106px;
+		border: none;
+		outline: none;
+	}
+	#workspace_invite > div > div:last-child {
+		margin-top: 25px;
+	}
+	#workspace_invite > div > div:last-child > button:first-child { /*다음*/
+		width: 122px;
+		height: 36px;
+		background-color: rgb(60, 10, 61);
+		color: white;
+		border-radius: 8px;
+		border: none;
+		padding: 0 12px 1px;
+		font-size: 15px;
+		font-weight: 700;
+		text-align: center;
+		cursor: pointer;
+		
+	}

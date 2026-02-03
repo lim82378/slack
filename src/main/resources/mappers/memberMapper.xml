@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+<!-- 부등호 등등 쓸때 <![CDATA[ ]]> 한줄만 뽑아올때 resultType="java.lang.Integer"-->
+  <!-- [MJ] 로그인 성공 여부 -->
+  <select id="loginSelect" resultType="int">
+  	SELECT COUNT (*) 
+  	FROM users u 
+  	WHERE user_Id = #{userId} 
+  	AND pw = #{userPw}
+  </select>
+  
+  <!-- [MJ] 비밀번호 조회 -->
+  <select id="selectPw" resultType="java.lang.String">
+  	SELECT pw 
+  	FROM users 
+  	WHERE user_id = #{userId}
+  </select>
+  
+  <!-- [MJ] 회원가입 -->
+  <insert id="createId">
+  	INSERT INTO users(user_id, nickname, name, pw, phone_number)
+  	VALUES(#{userId},#{nickname},#{name},#{pw},#{phoneNumber})
+  </insert>
+  
+<!-- [MJ] 전화번호 조회 -->
+  <select id="phoneCheck" resultType="int">
+  	SELECT  COUNT(*) 
+  	FROM users 
+  	WHERE phone_number= #{phoneNumber}
+  </select>
+  
+</mapper>

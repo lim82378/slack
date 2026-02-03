@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SearchMapper">
+	<!-- DAO에서 호출할 SQL쿼리문의 고유ID는 insertMember임   -->
+	<!-- 내 활동 목록 조회 / 채널 초대 기준. -->
+	<!-- <![CDATA[]> 비교/ 부등호 쓰일 때 SQL문 이걸로 감싸주기 -->
+	<insert id="insertNewSearchHistory" parameterType="map">
+		<selectKey resultType="int" keyProperty="searchHistoryIdx" order="AFTER">
+	        SELECT SEQ_SEARCH_HISTORY_IDX.CURRVAL FROM DUAL
+	    </selectKey>
+		INSERT INTO search_history(user_id, search_keyword, search_time, search_history_idx, workspace_idx)
+		VALUES(#{userId}, #{searchKeyword}, SYSDATE, SEQ_SEARCH_HISTORY_IDX.NEXTVAL, #{workspaceIdx})
+	</insert>
+	<delete id="deleteSearchHistory">
+		DELETE FROM search_history WHERE search_history_idx = #{searchHistoryIdx}
+	</delete>
+	<select id="selectSearchHistory" resultType="com.slack.dto.SearchHistoryDto">
+		SELECT search_keyword searchKeyword, search_time searchTime, search_history_idx searchHistoryIdx
+		FROM search_history
+		WHERE user_id = #{userId} 
+		AND workspace_idx = #{workspaceIdx}
+		ORDER BY search_time DESC
+	</select>
+	<select id="selectSearchAllDm" resultType="com.slack.dto.SearchDmChannelDto">
+		SELECT  w.nickname,w.profile_image profileImage, d.content, d.sent_time sentTime
+        FROM dm d JOIN workspace_users w 
+        ON d.dm_from = w.user_id 
+        WHERE (d.dm_from = #{dmFrom}
+        OR d.dm_to = #{dmTo})
+        AND d.workspace_idx = #{workspaceIdx} 
+        AND d.content LIKE '%' || #{keyword} || '%'
+	</select>
+	<select id="selectSearchAllChannel" resultType="com.slack.dto.SearchDmChannelDto">
+		SELECT w.nickname, w.profile_image profileImage, cm.content, cm.sent_time sentTime
+        FROM channel_msg cm JOIN workspace_users w
+        ON cm.user_id = w.user_id
+        WHERE cm.user_id = #{userId}
+        AND cm.workspace_idx = #{workspaceIdx}
+        AND cm.content LIKE '%' || #{keyword} || '%'
+	</select>  
+</mapper>

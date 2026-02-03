@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+ body{
+	position:relative;
+	width:100vw;
+	height:100vh;
+/* 	background-color:rgb(83, 36, 86); */
+	background-image : url("../img/LoginBackground.png");
+ }
+.ground {	
+	position:absolute;
+	width:700px;
+	height:425px;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	background-color: rgb(63, 11, 64);
+	border-radius:8px;
+	border: 2px solid purple;
+	box-shadow:-3px -3px pink, 5px 5px purple;
+}
+.hello {
+	position:relative;
+	width:700px;
+	height:100px;
+}
+.hello > span:nth-child(1) { 
+	position:absolute;
+	font-size:26px;
+	left:50%;
+	top:28%;
+	transform:translate(-50%, -50%);
+	line-height:40px;
+	color:rgb(255, 255, 255);
+	text-shadow: -1px 0px pink, 0px 1px pink, 1px 0px pink, 0px -1px pink;
+	}
+.hello > span:nth-child(2) { 
+	position:absolute;
+	font-size:18px;
+	left:50%;
+	top:62%;
+	transform:translate(-50%, -50%);
+	line-height:40px;
+	color:rgb(255, 255, 255);
+	text-shadow: -1px 0px pink, 0px 1px pink, 1px 0px pink, 0px -1px pink;
+}
+.email {
+	min-height:76px;
+	width:700px;
+}
+.email > span:nth-child(1){ /* 아이디 색깔 입히기 */
+	margin-left:32px;
+	font-size:15px;
+	color: rgb(255, 255, 255);
+	
+}
+.email > span:nth-child(2){ /* 별 색깔입히기 */
+	color:rgb(229, 135, 132);
+}
+.email > .email_bar {/* 이메일(별) 아래 바*/ 
+	height:40px;
+	width:628px;
+	background-color:rgb(84, 37, 86);
+	border-radius:8px;
+	margin-left:34px;
+	margin-top:10px;
+}
+.email > .email_bar.pink {
+	border:1px solid rgb(253, 146, 141);	
+}
+.email > .email_bar.pink + span.pink{
+	display:block !important;
+}
+.email > div:nth-child(3) > input {
+	line-height:40px;
+	font-weight:600;
+	font-size:10px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+    color: white;
+    font-size: 16px;
+    width: 90%;
+    margin-left:10px;
+}
+.email > span:last-child {
+	margin-left:35px;
+	position:relative;
+}
+.email > span:last-child > img {
+	width:16px;
+	position:absolute;
+	top: 6px;
+}
+.email span:last-child > span {
+	font-size:15px;
+	margin-left:20px;
+}
+ .password {
+    min-height: 76px;
+    width: 700px; 
+}
+/*.password >.password_bar{
+	border:1px solid rgb(253,146,141);
+}*/
+.password >.password_bar.pink{
+	border:1px solid rgb(253,146,141);	
+}
+.password > span:nth-child(1) {
+	margin-left:32px;
+	font-size:15px;
+	color: rgb(255, 255, 255);
+}
+.password > span:nth-child(2) {
+	color: rgb(229, 135, 132);
+}
+.password > .password_bar {
+	height:40px;
+	width:628px;
+	background-color:rgb(84, 37, 86);
+	border-radius:8px;
+	margin-left:34px;
+	margin-top:10px;
+}
+.password > .password_bar.pink +span{
+	display:block !important;	
+}
+.password > div:nth-child(3) > input{
+	line-height:40px;
+	font-weight:600;
+	font-size:10px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+    color: white;
+    font-size: 16px;
+    width: 90%;
+    margin-left:10px;
+}
+.password > span:last-child{/* 느낌표 + 유효하지 않은..."*/
+	margin-left:35px;
+	position:relative;
+}
+.password >span:last-child > img{ /* 느낌표 */
+	width:16px;
+	position:absolute;
+	top:6px; 
+}
+.password > span:last-child > span{ /*유효하지 않은...*/
+	font-size:15px;
+	margin-left:20px;
+}
+.forgot_password {
+	height: 37px;
+ 	width: 700px;
+}
+.forgot_password > span:nth-child(1){ /* 혹시 비밀번호 까먹음에 색깔입히기 */
+	font-size:13px;
+	margin-left:32px;
+	color: rgb(136, 154, 231);
+	cursor: pointer;
+}
+.login {
+	position:relative;
+	height:40px;
+	width:628px;
+	background-color:rgb(219, 95, 227);
+	border-radius:8px;
+	margin-left: 34px;
+	margin-top: 10px;
+}
+#login_btn {
+	background-color: transparent;
+	border: 0;
+	position:absolute;
+	left:50%;
+	top:53%;
+	transform:translate(-50%, -50%);
+	font-size:20px;
+	line-height:40px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	width: 628px;
+    height: 40px;
+}
+.sign {
+	height: 30px;
+ 	width: 700px;
+}
+.sign > span:nth-child(1) {
+	font-size:13px;
+	margin-left:32px;
+	color:rgb(154, 155 ,161);
+ }
+#btn_join { 
+	font-size:13px;
+	color:rgb(127, 167 ,153);
+	cursor: pointer;
+}
+.forgotten_password {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color:rgb(83, 36, 86);
+	width:372px;
+	height:195px;
+	z-index:20;
+	box-shadow: 0 18px 48px 0 #00000059;
+	border-radius:8px;
+	
+}
+.forgotten_password > div:nth-child(1){
+	height:40px;
+	width:372px;
+}
+.forgotten_password > div:nth-child(1) > span:nth-child(1){
+	font-size:17px;
+	margin-left:20px;
+	color:white;
+	font-weight:800;
+}
+.forgotten_password > div:nth-child(2){
+	height:115px;
+	width:372px;
+	padding: 0 6px;
+}
+.forgotten_password > div:nth-child(2) > span:nth-child(1){
+	font-size:15px;
+	font-weight:500;
+	color:rgba(180, 180, 183);
+}
+.user_email {
+	font-weight:600;
+	color:white;
+}
+.forgotten_password > div:nth-child(3) > .forgotten_password_footer {
+	position:relative;
+	height:41px;
+	width:95px;
+	background-color:rgb(88, 101, 242 );
+	border-radius:8px;
+}
+.forgotten_password_footer > span:nth-child(1){
+	line-height:41px;
+	padding-left:30px;
+	color:white;
+}
+.changing_password { /* 비밀번호를 변경하세요 박스 */
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color:rgb(83, 36, 86);
+	height:353px;
+	width:480px;
+	z-index:20;
+	box-shadow: 0 18px 48px 0 #00000059;
+	border-radius:8px;
+	padding:32px;
+}
+.changing_password > svg:nth-child(1){/* 이미지*/
+	margin: 0 0 20px 128px; 
+}
+.changing_password  > span:nth-child(3){ /*비밀번호 변경하기 */
+	margin-left:120px;
+	font-size:24px;
+	line-height:1.25;
+	color:white;
+}
+.newpassword{ /* 새 비밀번호 */
+	margin-left:3px;
+	font-size:17px;
+	line-height:3.25;
+	color:white;
+}
+.newstar{ /* 별  */
+	font-size:17px;
+	line-height:1.25;
+	color:rgb(253, 146, 141);
+}
+.changing_password > .changing_password_bar{ 
+	/* 비밀번호 변경하세요 의  비밀번호 변경하세요 바 */
+	width:400px;
+	height:50px;
+	border-radius: 8px;
+	background-color:rgb(208, 90, 215);
+}
+.changing_password > .changing_password_bar.pink{
+			border: 3px solid rgb(253, 146, 141);
+}
+.changing_password > .changing_password_bar.pink + span.pink {
+			display:block !important;
+}
+.changing_password > .changing_password_bar > input{
+	/* 비밀번호 변경하세요의 글쓰게 하기위한 */
+	border:none;
+	outline:none;
+	background-color:transparent;
+	line-height:50px;
+	margin-left:10px;
+	width:90%;
+	font-size:20px;
+}
+.changing_password > div:nth-child(3):has(input:nth-child(1):focus) {
+			border: 2px solid #5D7BA4;
+		}
+		.changing_password_bar:HAS(input:focus){
+			border: 1px solid rgb(227, 25, 204);
+		}
+		.changing_password span:last-child {
+			position: relative;
+			margin-left:26px;
+		}
+		.changing_password span:last-child > img:nth-child(1) { /* "!" 크기 및 글자조정 */
+			width: 14px;
+			position: absolute;
+			top: 4px;
+			left: 3px;
+		}
+		.changing_password span:last-child > span:nth-child(2) { /* 필수요건 크기 및 글자조정 */
+			position: absolute;
+			font-weight:500;
+			left:20px;
+			font-size:14px;
+		}.changing_password> div:nth-child(3):has(input:nth-child(1):focus) {
+			border: 2px solid #5D7BA4;
+		}
+		.changing_password_bar:HAS(input:focus){
+			border: 1px solid rgb(227, 25, 204);
+		}
+		.changing_password span:last-child { /*여기해야함  */
+			margin-left:2px;
+			
+		}
+		.changing_password span:last-child > img:nth-child(1) { /* "!" 크기 및 글자조정 */
+			width: 14px;
+			
+		}
+		.changing_password span:last-child > span:nth-child(2) { /* 필수요건 크기 및 글자조정 */
+			
+		}
+.pink { color:rgb(253, 146, 141); }
+	
+*, :focus { box-sizing: border-box; }
+.border { border: 1px solid red ;}
+.fl { float: left; }
+.fr { float: right; }

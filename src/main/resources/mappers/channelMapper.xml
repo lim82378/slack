@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChannelMapper">
+
+<!-- 부등호 등등 쓸때 <![CDATA[ ]]> 한줄만 뽑아올때 resultType="java.lang.Integer"-->
+<!-- [MJ] 홈 즐겨 찾기 채널 리스트 조회 완료 -->
+<select id="favoriteChannel" resultType="com.slack.dto.ChannelIdxNameDto">
+	SELECT c.channel_name AS channelName, c.channel_idx AS channelIdx
+	FROM favorite f 
+	INNER JOIN channel c 
+	ON f.channel_idx = c.channel_idx 
+	WHERE user_id = #{userId} 
+	AND c.workspace_idx = #{workspaceIdx}
+</select>
+
+<!-- [MJ] 홈 채널 리스트 조회 완료 -->
+<select id="myChannelName" resultType="com.slack.dto.ChannelIdxNameDto">
+	SELECT c.channel_name AS channelName, c.channel_idx AS channelIdx 
+	FROM channel_users cu 
+	INNER JOIN channel c 
+	ON cu.channel_idx = c.channel_idx 
+	WHERE user_id = #{userId} 
+	AND c.workspace_idx = #{workspaceIdx} 
+	AND c.channel_idx 
+	NOT IN (SELECT f.channel_idx 
+			FROM favorite f 
+			WHERE f.user_id = #{userId})
+	ORDER BY c.channel_idx ASC
+</select>
+
+<!-- [MJ] 채널 메세지 목록 조회 -->
+<select id="channelMsgSelect" resultType="com.slack.dto.Channel5Dto">
+	SELECT cm.channel_idx AS channelIdx,c.channel_name AS channelName, wu.nickname ,cm.user_id AS userId, cm.content, 
+	TO_CHAR(cm.sent_time, 'YYYY-MM-DD') AS sentTime, cm.file_idx AS fileIdx, 
+	TO_CHAR(c.createdtime, 'YYYY-MM-DD') AS createdtime, wu.profile_image AS profileImage
+	FROM channel_msg cm 
+	Join channel c 
+	ON cm.channel_idx = c.channel_idx 
+	JOIN workspace_users wu 
+	ON cm.user_id = wu.user_id
+	WHERE cm.channel_idx = #{channelIdx} 
+	AND wu.workspace_idx = #{workspaceIdx} 
+	ORDER BY sent_time
+</select>
+
+<!-- [MJ] 채널 메세지 보내기 -->
+<insert id="sendChannelMsg">
+	INSERT INTO channel_msg(channel_idx, user_id, content, sent_time, workspace_idx) 
+	VALUES (#{channelIdx}, #{userId}, #{content}, sysdate, #{workspaceIdx})
+</insert>
+
+<!-- [MJ]채널 기본 내용 조회 -->
+<select id="channelroomSelect" resultType="com.slack.dto.Channel5Dto">
+	SELECT channel_name AS channelName, TO_CHAR(createdtime, 'YYYY-MM-DD') AS createdtime
+    FROM channel
+    WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ]채널 사용자 프로필 이미지 조회 -->
+<select id="userProfileImgSelect" resultType="java.lang.String">
+	SELECT profile_image AS profileImg 
+	FROM workspace_users 
+	WHERE user_id = #{userId} 
+	AND workspace_idx = #{workspaceIdx}
+</select>
+
+<!-- [MJ] 즐겨찾기 중복 체크 완료 -->
+<select id="checkFavorite" resultType="int">
+	SELECT COUNT(*)
+	FROM favorite
+	WHERE channel_idx = #{channelIdx} 
+	AND user_id = #{userId}
+</select>
+
+<!-- [MJ] 채널 즐겨찾기 추가 완료  -->
+<insert id="favoriteInsert">
+	INSERT INTO favorite(channel_idx, user_id) 
+	VALUES (#{channelIdx}, #{userId})
+</insert>
+
+<!-- [MJ] 채널 즐겨찾기 제거 완료 -->
+<delete id="favoriteDelete">
+	DELETE FROM favorite 
+	WHERE channel_idx = #{channelIdx} 
+	AND user_id = #{userId}
+</delete>
+
+<!-- [MJ] 채널에서 나가기 -->
+<delete id="channelDelete">
+	DELETE FROM channel_users 
+	WHERE channel_idx =  #{channelIdx} 
+	AND user_id = #{userId}
+</delete>
+
+<!-- [MJ] 채널 인원수 조회 -->
+<select id="ghostChannelSelect" resultType="int">
+	SELECT COUNT(user_id) 
+	FROM channel_users 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 완전 삭제 -->
+<delete id="ghostChannelDelete">
+	DELETE FROM channel 
+	WHERE channel_idx= #{channelIdx}
+</delete>
+
+<!-- [MJ] 채널 생성 -->
+<insert id="createChannel">
+	INSERT INTO channel(channel_idx, workspace_idx, channel_name, channel_manager, topic, explanation, createdtime) 
+	VALUES (seq_channel_idx.nextval, #{workspaceIdx}, #{channelName}, #{channelManager}, #{topic}, #{explanation}, sysdate)
+</insert>
+
+<!-- [MJ] 채널 멤버 조회 -->
+<select id="channelMemberSelect" resultType="java.lang.String">
+	SELECT user_id FROM channel_users 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 멤버 검색 사용자 이름 또는 이메일 입력인데 -->
+<select id="searchForMembers" resultType="java.lang.String">
+	SELECT u.name FROM channel_users cu 
+	INNER JOIN users u ON cu.user_id = u.user_id 
+	WHERE channel_idx = #{channelIdx} 
+	AND (u.name LIKE '%' || #{search} || '%' OR u.user_id LIKE '%' || #{search} || '%')
+</select>
+
+<!-- [MJ] 채널 멤버 사용자 추가 -->
+<insert id="addChannelMemberUsers">
+	INSERT INTO channel_users(user_id, channel_idx) 
+	VALUES (#{userId}, #{channelIdx})
+</insert>
+
+<!-- [MJ] 채널 멤버 추가를 위한 채널 검색(매니저) -->
+<select id="addChannelMemberSelect" resultType="int">
+	SELECT MAX(channel_idx) 
+	FROM channel 
+	WHERE workspace_idx = #{workspaceIdx}
+</select>
+
+<!-- [MJ] 채널 매니저 이름 조회 -->
+<select id="getChannelManagerName" resultType="java.lang.String">
+	SELECT name 
+	FROM channel c 
+	INNER JOIN users u 
+	ON c.channel_manager = u.user_id 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채팅내역조회(AI) -->
+<select id="channelMsgSelectAI" resultType="com.slack.dto.Channel5Dto">
+	<![CDATA[ 
+		SELECT w.nickname, c.content
+		FROM channel_msg c 
+		JOIN workspace_users w 
+		ON c.user_id = w.user_id 
+		WHERE c.sent_time >= sysdate - 7 
+		AND channel_idx = #{channelIdx} 
+		AND w.workspace_idx = #{workspaceIdx}
+		ORDER BY c.sent_time ASC
+	]]>
+</select>
+
+<!-- [MJ] 채널 세부정보 보기 -->
+<select id="viewChannel" resultType="com.slack.dto.ChannelViewDto">
+	SELECT workspace_idx, channel_name, topic, explanation 
+	FROM channel 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 이름 변경 -->
+<update id="channelNewName">
+	UPDATE channel 
+	SET channel_name = #{channelName} 
+	WHERE channel_idx = #{channelIdx} 
+	AND channel_manager = #{channelManager}
+</update>
+
+<!-- [MJ] 채널 이름 조회 -->
+<select id="channelNameSelect" resultType="java.lang.String"> 
+	SELECT channel_name 
+	FROM channel 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 주제 편집 -->
+<update id="channelTopic">
+	UPDATE channel SET topic = #{newTopic} 
+	WHERE channel_idx = #{channelIdx} 
+	AND channel_manager = #{channelManager}
+</update>
+
+<!-- [MJ] 채널 주제 조회 -->
+<select id="channelTopicSelect" resultType="java.lang.String"> 
+	SELECT topic 
+	FROM channel 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 설명 편집 -->
+<update id="channelExplanation">
+	UPDATE channel 
+	SET explanation = #{explanation} 
+	WHERE channel_idx = #{channelIdx} 
+	AND channel_manager = #{channelManager}
+</update>
+
+<!-- [MJ] 채널 설명 조회 -->
+<select id="channelExplanationSelect" resultType="java.lang.String"> 
+	SELECT explanation 
+	FROM channel 
+	WHERE channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 멤버 사용자 중복 여부 확인 -->
+<select id="checkChannelMember" resultType="java.lang.String">
+	SELECT user_id 
+	FROM channel_users 
+	WHERE user_id = #{userId} 
+	AND channel_idx = #{channelIdx}
+</select>
+
+<!-- [MJ] 채널 멤버 제거 -->
+<delete id="removeChannelMember">
+	DELETE FROM channel_users 
+	WHERE user_id = #{userId} 
+	AND channel_idx = #{channelIdx}
+</delete>
+
+<!-- [MJ] 채널 멤버 닉네임,프로필이미지,이메일 조회 -->
+<select id="channelMemberName" resultType="map">
+	SELECT wu.nickname AS nickname, wu.profile_image AS profileImage, cu.user_id AS userId 
+	FROM channel_users cu 
+	JOIN workspace_users wu 
+	ON cu.user_id = wu.user_id 
+	WHERE cu.channel_idx = #{channelIdx} 
+	AND wu.workspace_idx = #{workspaceIdx}
+</select>
+</mapper>
