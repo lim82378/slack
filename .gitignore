@@ -2,4 +2,5 @@
 .project
 .springBeans
 .jar
-.classpath
+/target/ 
+
